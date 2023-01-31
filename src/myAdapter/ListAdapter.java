@@ -36,7 +36,8 @@ public class ListAdapter implements HList{
 	 * @throws IndexOutOfBoundsException if the endpoints indexes are out of bounds
 	 */
 	private ListAdapter(ListAdapter mother, int fromIndex, int toIndex) throws IndexOutOfBoundsException {
-		if(fromIndex<0) throw new IndexOutOfBoundsException("A negative start index has been passed as argument!");v = mother.v;
+		if(fromIndex<0) throw new IndexOutOfBoundsException("A negative start index has been passed as argument!");
+		v = mother.v;
 		motherList = mother;
 		from = fromIndex + mother.from;
 		to = toIndex + from;
