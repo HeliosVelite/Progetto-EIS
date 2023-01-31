@@ -6,13 +6,13 @@ package myAdapter;
 An iterator for lists that allows the programmer 
  to traverse the list in either direction, modify 
  the list during iteration, and obtain the iterator's 
- current position in the list. A <tt>ListIterator</tt> 
+ current position in the list. A <i>ListIterator</i> 
  has no current element; its <i>cursor position</i> always 
  lies between the element that would be returned by a call 
- to <tt>previous()</tt> and the element that would be 
- returned by a call to <tt>next()</tt>. In a list of 
- length <tt>n</tt>, there are <tt>n+1</tt> valid 
- index values, from <tt>0</tt> to <tt>n</tt>, inclusive. 
+ to <i>previous()</i> and the element that would be 
+ returned by a call to <i>next()</i>. In a list of 
+ length <i>n</i>, there are <i>n+1</i> valid 
+ index values, from <i>0</i> to <i>n</i>, inclusive. 
  </p>
  *
  * <pre>

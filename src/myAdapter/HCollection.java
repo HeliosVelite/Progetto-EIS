@@ -33,7 +33,6 @@ package myAdapter;
  *@see HList
  */
 public interface HCollection {
-    // Query Operations
 
     /**
      * Returns the number of elements in this collection. If this collection
@@ -139,8 +138,6 @@ public interface HCollection {
 
     Object[] toArray(Object arrayTarget[]);
 
-    // Modification Operations
-
     /**
      * Ensures that this collection contains the specified element (optional
      * operation). Returns true if this collection changed as a result of the call.
@@ -195,7 +192,6 @@ public interface HCollection {
      * @throws ClassCastException if the types of one or more elements in the specified collection are incompatible with this collection (optional).
      * @throws NullPointerException if the specified collection contains one or more null elements and this collection does not support null elements (optional).
      * @throws NullPointerException if the specified collection is null.
-     * @see #contains(Object)
      */
     boolean containsAll(HCollection coll);
 
@@ -212,7 +208,6 @@ public interface HCollection {
      * @throws ClassCastException if the class of an element of the specified collection prevents it from being added to this collection.
      * @throws NullPointerException if the specified collection contains one or more null elements and this collection does not support null elements, or if the specified collection is null.
      * @throws IllegalArgumentException some aspect of an element of the specified collection prevents it from being added to this collection.
-     * @see #add(Object)
      */
     boolean addAll(HCollection coll);
 
@@ -229,8 +224,6 @@ public interface HCollection {
      * @throws ClassCastException if the types of one or more elements in this collection are incompatible with the specified collection (optional).
      * @throws NullPointerException if this collection contains one or more null elements and the specified collection does not support null elements (optional).
      * @throws NullPointerException if the specified collection is null.
-     * @see #remove(Object)
-     * @see #contains(Object)
      */
     boolean removeAll(HCollection coll);
 
@@ -247,8 +240,6 @@ public interface HCollection {
      * @throws ClassCastException if the types of one or more elements in this collection are incompatible with the specified collection (optional).
      * @throws NullPointerException if this collection contains one or more null elements and the specified collection does not support null elements (optional).
      * @throws NullPointerException if the specified collection is null.
-     * @see #remove(Object)
-     * @see #contains(Object)
      */
     boolean retainAll(HCollection coll);
 
@@ -288,9 +279,6 @@ public interface HCollection {
      * @param obj Object to be compared for equality with this collection.
      * @return true if the specified object is equal to this collection
      *
-     * @see Object#equals(Object)
-     * @see HSet#equals(Object)
-     * @see HList#equals(Object)
      */
     boolean equals(Object obj);
 
@@ -304,9 +292,6 @@ public interface HCollection {
      * implies that c1.hashCode()==c2.hashCode().
      *
      * @return the hash code value for this collection
-     *
-     * @see Object#hashCode()
-     * @see Object#equals(Object)
      */
     int hashCode();
 }
