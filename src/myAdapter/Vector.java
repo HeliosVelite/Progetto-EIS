@@ -32,7 +32,7 @@ public class Vector {
         vector = new java.util.Vector<Object>(initialCapacity, capacityIncrement);
     }
 
-    public void addElement(Object obj, Object o){
+    public void addElement(Object obj){
         vector.addElement(obj);
     }
 
