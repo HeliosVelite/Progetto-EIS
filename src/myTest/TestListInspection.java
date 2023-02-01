@@ -6,6 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import myAdapter.HCollection;
+import myAdapter.HIterator;
 import myAdapter.HList;
 import myAdapter.ListAdapter;
 
@@ -19,7 +20,7 @@ import myAdapter.ListAdapter;
  * <b>Test Description & Expected results</b>
  * <p>See test methods.</p>
  * <b>Pre-Condition</b>
- * <p>Add method must work as intended. The void and HCollection constructor must work as intended.</p>
+ * <p>Add and Iterator methods must work as intended. The void and HCollection constructor must work as intended.</p>
  * <b>Post-Condition</b>
  * <p>Each item in the list is in its correct position.</p>
  * </div>
@@ -102,8 +103,15 @@ public class TestListInspection {
 		assertEquals(pokedex[pokedex.length - 1], list.get(list.size() - 1));
 		boolean exceptionThrown = false;
 		try {
-			list.get(1000);
 			list.get(-1);
+		}
+		catch(IndexOutOfBoundsException e) {
+			exceptionThrown = true;
+		}
+		assertTrue(exceptionThrown);
+		exceptionThrown = false;
+		try {
+			list.get(list.size());
 		}
 		catch(IndexOutOfBoundsException e) {
 			exceptionThrown = true;
@@ -231,5 +239,21 @@ public class TestListInspection {
 				assertTrue(sameIndex);
 			}
 		}
+	}
+	/**
+	 * <b>Description: </b> checks correspondence with hash code algorithm for lists
+	 * <br>
+	 * <b>Expected results: </b> the hash codes are equals
+	 */
+	@Test
+	public void testHashCode() {
+		int hashCode = 1;
+		HIterator i = list.iterator();
+		while (i.hasNext()) {
+			Object obj = i.next();
+			hashCode = 31*hashCode + (obj==null ? 0 : obj.hashCode());
+		}
+		boolean equalCodes = hashCode == list.hashCode();
+		assertTrue(equalCodes);
 	}
 }

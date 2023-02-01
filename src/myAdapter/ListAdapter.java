@@ -136,7 +136,7 @@ public class ListAdapter implements HList{
 	}
 	
 	public boolean addAll(int index, HCollection c) throws NullPointerException, IndexOutOfBoundsException {
-		if(index+from >= to || index < 0) throw new IndexOutOfBoundsException();
+		if((index+from >= to && !isEmpty()) || index < 0) throw new IndexOutOfBoundsException();
 		if(c == null) throw new NullPointerException();
 		HIterator x = c.iterator();
 		while(x.hasNext()) {

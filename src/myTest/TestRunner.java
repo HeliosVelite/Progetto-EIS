@@ -15,7 +15,7 @@ import java.util.*;
  * @version Hamcrest: 1.3
  * @version JVM from JME CLDC 1.1
  *
- * @author Andrea Stocco
+ * @author Zuech
  */
 public class TestRunner {
     private static int totalTests = 0;
@@ -29,7 +29,7 @@ public class TestRunner {
 
         System.out.println("*** Tests in execution... ***");
         System.out.println();
-        res = JUnitCore.runClasses(ListAdapterTest.class);
+        res = JUnitCore.runClasses(ListAdapterTestSuite.class);
         esitoTest(res);
     }
 
