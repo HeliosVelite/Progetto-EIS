@@ -184,6 +184,7 @@ public class ListAdapter implements HList{
 	
 	@Override
 	public boolean equals(Object o) {
+		if(o == null) return false;
 		try {
 			ListAdapter otherList = (ListAdapter) o;
 			if(otherList.size() != size()) return false;
