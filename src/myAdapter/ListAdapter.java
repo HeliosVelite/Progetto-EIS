@@ -35,11 +35,11 @@ public class ListAdapter implements HList{
 	 */
 	private ListAdapter(ListAdapter mother, int fromIndex, int toIndex) throws IndexOutOfBoundsException {
 		if(fromIndex<0) throw new IndexOutOfBoundsException("A negative start index has been passed as argument!");
+		if(toIndex > mother.size()) throw new IndexOutOfBoundsException("The high endpoint index is greater than the list size!"); 
 		v = mother.v;
 		motherList = mother;
 		from = fromIndex + mother.from;
-		to = toIndex + from;
-		if(to >= v.size()) throw new IndexOutOfBoundsException("The high endpoint index is greater than the list size!"); 
+		to = toIndex + mother.from;
 	}
 	
 	public ListAdapter(HCollection c) {
@@ -76,26 +76,18 @@ public class ListAdapter implements HList{
 	}
 	
 	public Object[] toArray() {
-		Object[] a = new Object[to - from];
-		for(int i = from; i < to; i++)
-			a[i - from] = v.elementAt(i);
+		Object[] a = new Object[size()];
+		for(int i = 0; i < size(); i++) {
+			a[i] = get(i);
+		}
 		return a;
 	}
 	
 	public Object[] toArray(Object[] a) throws NullPointerException {
 		if(a == null) throw new NullPointerException();
-		if(a.length < to - from) return toArray();
-		int i = from;
-		while(i < to) {
-			a[i - from] = v.elementAt(i);
-			i++;
-		}
-		if(a.length > to - from) {
-			i -= from;
-			while(i < a.length) {
-				a[i] = null;
-				i++;
-			}
+		if(a.length < size()) return toArray();
+		for(int i = 0; i < a.length; i++) {
+			a[i] = i < size() ? get(i) : null;
 		}
 		return a;
 	}
@@ -197,7 +189,9 @@ public class ListAdapter implements HList{
 			if(otherList.size() != size()) return false;
 			HIterator l1 = iterator(), l2 = otherList.iterator();
 			while(l1.hasNext() && l2.hasNext()) {
-				if(!l1.next().equals(l2.next())) return false;
+				Object n1 = l1.next(), n2 =l2.next();
+				if((n1 == null && n2 != null) || (n1 != null && n2 == null)) return false;
+				else if(n1 != null && !n1.equals(n2)) return false;
 			}
 			return true;
 		}
@@ -259,7 +253,7 @@ public class ListAdapter implements HList{
 	
 	public ListAdapter subList(int fromIndex, int toIndex) throws IndexOutOfBoundsException {
 		if(toIndex > size() || fromIndex < 0) throw new IndexOutOfBoundsException();
-		return new ListAdapter(this, fromIndex, toIndex - 1);
+		return new ListAdapter(this, fromIndex, toIndex);
 	}
 	
 	public class ListAdapterIterator implements HListIterator {

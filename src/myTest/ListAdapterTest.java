@@ -1129,7 +1129,7 @@ public class ListAdapterTest
         emptyList.add("Ajax");
         assertTrue(teamList.containsAll(emptyList));
         emptyList.addAll(teamList);
-        // emptyList = {"Ajax", "Milan", "Liverpool", "Real Madrid", "Manchester United", "Bayern Monaco", "Ajax"}
+        // emptyList = {"Ajax", "Milan", "Liverpool", "Real Madrid", "Manchester United", "Bayern Monaco", "Ajax", Barcelona}
         assertEquals(0, emptyList.indexOf("Ajax"));
         assertEquals(emptyList.size() - 2, emptyList.lastIndexOf("Ajax"));
         emptyList.removeAll(new ListAdapter(emptyList.subList(0, 1))); // removed all "Ajax"s
