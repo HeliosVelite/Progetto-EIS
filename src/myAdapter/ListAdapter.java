@@ -1,7 +1,5 @@
 package myAdapter;
 
-import static org.junit.Assert.assertNotNull;
-
 import java.util.NoSuchElementException;
 
 public class ListAdapter implements HList{
@@ -41,7 +39,15 @@ public class ListAdapter implements HList{
 		motherList = mother;
 		from = fromIndex + mother.from;
 		to = toIndex + from;
-		if(to > v.size()) throw new IndexOutOfBoundsException("The high endpoint index is greater than the list size!"); 
+		if(to >= v.size()) throw new IndexOutOfBoundsException("The high endpoint index is greater than the list size!"); 
+	}
+	
+	public ListAdapter(HCollection c) {
+		this();
+		HIterator i = c.iterator();
+		while(i.hasNext()) {
+			add(i.next());
+		}
 	}
 	
 	public int size() {
@@ -153,19 +159,22 @@ public class ListAdapter implements HList{
 		HIterator x = c.iterator();
 		boolean changed = false;
 		while(x.hasNext()) {
-			changed = remove(x.next());
+			Object o = x.next();
+			while(contains(o)) {
+				changed = remove(o);
+			}
 		}
 		return changed;
 	}
 	
 	public boolean retainAll(HCollection c) throws NullPointerException {
 		if(c == null) throw new NullPointerException();
-		HIterator x = c.iterator();
+		HIterator x = iterator();
 		boolean changed = false;
 		while(x.hasNext()) {
 			Object o = x.next();
-			if(contains(o)) {
-				remove(o);
+			if(!c.contains(o)) {
+				x.remove();
 				changed = true;
 			}
 		}
@@ -173,9 +182,10 @@ public class ListAdapter implements HList{
 	}
 	
 	public void clear() {
-		int i;
-		for(i = 0;i < to - from; i++) {
-			v.removeElementAt(i + from);
+		int i = 0;
+		while(i + from < to) {
+			v.removeElementAt(from);
+			i++;
 		}
 		updateRange(i*-1);
 	}
@@ -233,7 +243,7 @@ public class ListAdapter implements HList{
 	}
 	
 	public int lastIndexOf(Object o) {
-		int index = v.lastIndexOf(o, to);
+		int index = v.lastIndexOf(o, to - 1);
 		if(index < from) return -1;
 		return index - from;
 	}
@@ -243,13 +253,13 @@ public class ListAdapter implements HList{
 	}
 	
 	public HListIterator listIterator(int index) throws IndexOutOfBoundsException {
-		if(index >= to - from || index < 0) throw new IndexOutOfBoundsException();
-		return new ListAdapterIterator(index + from);
+		if(index > size() || index < 0) throw new IndexOutOfBoundsException();
+		return new ListAdapterIterator(index);
 	}
 	
 	public ListAdapter subList(int fromIndex, int toIndex) throws IndexOutOfBoundsException {
-		if(toIndex >= to - from || fromIndex < 0) throw new IndexOutOfBoundsException();
-		return new ListAdapter(this, fromIndex, toIndex);
+		if(toIndex > size() || fromIndex < 0) throw new IndexOutOfBoundsException();
+		return new ListAdapter(this, fromIndex, toIndex - 1);
 	}
 	
 	public class ListAdapterIterator implements HListIterator {
@@ -263,43 +273,48 @@ public class ListAdapter implements HList{
 			lastCall = -1;
 		}
 		public boolean hasNext() {
-			return cursor < to;
+			return cursor < size();
 		}
 		public Object next() throws NoSuchElementException {
 			if(!hasNext()) throw new NoSuchElementException();
-			cursor += 1;
 			lastCall = cursor;
-			return v.elementAt(cursor);
+			Object e = get(cursor);
+			cursor++;
+			return e;
 		}
 		public boolean hasPrevious() {
-			return cursor >= from; 
+			return cursor > 0; 
 		}
 		public Object previous() throws NoSuchElementException {
 			if(!hasPrevious()) throw new NoSuchElementException();
 			cursor -= 1;
 			lastCall = cursor;
-			return v.elementAt(cursor);
+			return get(cursor);
 		}
 		public int nextIndex() {
-			return hasNext() ? cursor + 1 : size();
+			if(hasNext())
+				return cursor;
+			return size();
 		}
 		public int previousIndex() {
-			return hasPrevious() ? cursor - 1 : -1;
+			if(hasPrevious())
+				return cursor - 1;
+			return -1;
 		}
 		public void remove() throws IllegalStateException {
-			if(lastCall <0) throw new IllegalStateException();
+			if(lastCall < 0) throw new IllegalStateException();
 			ListAdapter.this.remove(lastCall);
-			if(cursor >= lastCall) cursor--;
+			if(cursor > lastCall) cursor--;
 			lastCall = -1;
 		}
 		public void set(Object o) throws IllegalStateException {
 			if(lastCall <0) throw new IllegalStateException();
 			ListAdapter.this.set(lastCall, o);
-			lastCall = -1;
 		}
 		public void add(Object o) {
 			ListAdapter.this.add(cursor, o);
 			cursor++;
+			lastCall = -1;
 		}
 	}
 }
