@@ -27,7 +27,7 @@ import myAdapter.ListAdapter;
  */
 public class TestListConstructor {
 	
-	private static final String[] pokedex = {"Bulbasaur", "Ivysaur", "Venusaur", "Charmander", "Charmeleon",
+	private final String[] pokedex = {"Bulbasaur", "Ivysaur", "Venusaur", "Charmander", "Charmeleon",
 			"Charizard", "Squirtle", "Wartortle", "Blastoise"};
 	/**
 	 * <b>Description: </b> the generated list is checked to be empty through the use of isEmpty,

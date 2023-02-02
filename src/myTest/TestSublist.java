@@ -30,7 +30,7 @@ import myAdapter.ListAdapter;
 public class TestSublist {
 
 	private HList list;
-	private static String[] pokedex = {"Bulbasaur", "Ivysaur", "Venusaur", "Charmander", "Charmeleon",
+	private final String[] pokedex = {"Bulbasaur", "Ivysaur", "Venusaur", "Charmander", "Charmeleon",
 			"Charizard", "Squirtle", "Wartortle", "Blastoise"};
 	@Before
 	public void setUp() {
