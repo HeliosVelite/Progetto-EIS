@@ -22,7 +22,7 @@ import myAdapter.ListAdapter;
  * <b>Pre-Condition</b>
  * <p>Add and Iterator methods must work as intended. The void and HCollection constructor must work as intended.</p>
  * <b>Post-Condition</b>
- * <p>Each item in the list is in its correct position.</p>
+ * <p>Each item in the list is in its correct position and all tests are passed with the expected results.</p>
  * </div>
  */
 

@@ -13,13 +13,14 @@ import myAdapter.ListAdapter;
  * Hlist interface</p>
  * <div style="display:grid; grid-template-columns: 20% 1fr; align-items: center;"> 
  * <b>Test Case Design</b>
- * <p> An empty list is used. A pokedex-like list is used. </p>
+ * <p> An empty list and pokedex-like list are used to test list manipulation methods and check edge-cases.</p>
  * <b>Test Description & Expected Results</b>
  * <p>See test methods</p>
  * <b>Pre-Condition</b>
- * <p>size, lastIndexOf, isEmpty, get, toArray methods must work as specified.</p>
+ * <p>size, lastIndexOf, isEmpty, get, toArray methods must work as specified. The void and HCollection
+ * constructor must work as intended.</p>
  * <b>Post-Condition</b>
- * <p>All tests are passed with the expected results</p>
+ * <p>All tests are passed with the expected results.</p>
  * </div>
  */
 public class TestListManipulation {
