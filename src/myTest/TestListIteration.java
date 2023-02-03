@@ -268,22 +268,102 @@ public class TestListIteration {
 	}
 	
 	/**
-	 * <b>Description: </b>
+	 * <b>Description: </b> checks removal of the last element returned by previous/next. Also checks that
+	 * remove can be called once per call of previous/next and only if add has not been called in the meanwhile
 	 * <br>
-	 * <b>Expected Results: </b>
+	 * <b>Expected Results: </b> the element returned by the last call to next/previous had been successfully
+	 * removed from the list. Calling remove without calling next/previous at least once since iterator
+	 *  initialisation or last add call, throws IllegalStateException
 	 */
 	@Test
 	public void testRemove() {
-		fail("Not yet implemented");
+		HListIterator i = list.listIterator(3);
+		boolean exceptionThrown = false;
+		try {
+			i.remove();
+		}
+		catch(IllegalStateException e) {
+			exceptionThrown = true;
+		}
+		assertTrue(exceptionThrown);
+		Object o = i.next();
+		assertTrue(list.contains(o));
+		i.remove();
+		assertFalse(list.contains(o));
+		exceptionThrown = false;
+		try {
+			i.remove();
+		}
+		catch(IllegalStateException e) {
+			exceptionThrown = true;
+		}
+		assertTrue(exceptionThrown);
+		o = i.previous();
+		assertTrue(list.contains(o));
+		i.remove();
+		assertFalse(list.contains(o));
+		exceptionThrown = false;
+		try {
+			i.next();
+			i.add("Alcremie");
+			i.remove();
+		}
+		catch(IllegalStateException e) {
+			exceptionThrown = true;
+		}
+		assertTrue(exceptionThrown);
 	}
 	
 	/**
-	 * <b>Description: </b>
+	 * <b>Description: </b> checks the correct setting of the last element returned by previous/next to the
+	 * provided Object. Also checks that set can be called once per call of previous/next and only if add 
+	 * or remove have not been called in the meanwhile
 	 * <br>
-	 * <b>Expected Results: </b>
+	 * <b>Expected Results: </b> the element returned by the last call to next/previous had been successfully
+	 * set to the provided Object. Calling set without calling next/previous at least once since iterator
+	 * initialisation or last add/remove call, throws IllegalStateException
 	 */
 	@Test
 	public void testSet() {
-		fail("Not yet implemented");
+		HListIterator i = list.listIterator(3);
+		boolean exceptionThrown = false;
+		try {
+			i.set("Talonflame");
+		}
+		catch(IllegalStateException e) {
+			exceptionThrown = true;
+		}
+		assertTrue(exceptionThrown);
+		int x = i.nextIndex();
+		Object o = i.next();
+		i.set("Porygon");
+		assertNotEquals(list.get(x), o);
+		i.set(o);
+		assertEquals(list.get(x), o);
+		x = i.previousIndex();
+		o = i.previous();
+		i.set("Porygon");
+		assertNotEquals(list.get(x), o);
+		i.set(o);
+		assertEquals(list.get(x), o);
+		exceptionThrown = false;
+		try {
+			i.add("Alcremie");
+			i.set("Arcanine");
+		}
+		catch(IllegalStateException e) {
+			exceptionThrown = true;
+		}
+		assertTrue(exceptionThrown);
+		exceptionThrown = false;
+		try {
+			i.next();
+			i.remove();
+			i.set("Arcanine");
+		}
+		catch(IllegalStateException e) {
+			exceptionThrown = true;
+		}
+		assertTrue(exceptionThrown);
 	}
 }

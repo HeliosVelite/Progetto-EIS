@@ -93,11 +93,11 @@ public class TestListManipulation {
 	 * <b>Description: </b> checks if items are added at the specified index of the list, making it grow in
 	 * size and shifting already contained items to the right. Checks for IndexOutOfBoundsException
 	 * <br>
-	 * <b>Expected Results: </b> item has been correctly added and subsequent items are correctly shifted;
-	 * IndexOutOfBounds has been correctly thrown
+	 * <b>Expected Results: </b> the collection has been correctly added and subsequent items are correctly shifted;
+	 * IndexOutOfBounds has been thrown
 	 */
 	@Test
-	public void testAddAll() {
+	public void testAddAllAtIndex() {
 		boolean exceptionThrown = false;
 		try {
 			emptylist.add(-1, list);
@@ -119,6 +119,23 @@ public class TestListManipulation {
 				assertEquals(pokedex[i - 3], emptylist.get(i));
 			}
 		}
+	}
+
+	/**
+	 * <b>Description: </b> checks if items are added at the end of the list, making it grow in
+	 * size.
+	 * <br>
+	 * <b>Expected Results: </b> the collection has been correctly added at the end
+	 */
+	@Test
+	public void testAddAll() {
+		int pSize = emptylist.size();
+		assertTrue(emptylist.addAll(list));
+		boolean grew = pSize < emptylist.size();
+		assertTrue(grew);
+		boolean same = emptylist.size() == list.size();
+		assertTrue(same);
+		assertArrayEquals(list.toArray(), emptylist.toArray());
 	}
 	
 	/**
