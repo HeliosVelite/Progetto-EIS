@@ -71,7 +71,10 @@ public class Vector {
 	    public boolean contains(Object elem){
 	        return vector.contains(elem);
 	    }
-	
+	    /**
+	     * Copies the components of this vector into the specified array. The array must be big enough to hold all the objects in this vector.
+	     * @param anArray the array into which the components get copied.
+	     */
 	    public void copyInto(Object[] anArray){
 	        vector.copyInto(anArray);
 	    }
@@ -87,7 +90,7 @@ public class Vector {
 	    /**
 	     * Returns an enumeration of the components of this vector.
 	     * @return an enumeration of the components of this vector.
-	     * @see {@link Enumeration}
+	     * @see Enumeration
 	     */
 	    public Enumeration<Object> elements(){
 	        return vector.elements();
@@ -111,7 +114,7 @@ public class Vector {
 	     * Searches for the first occurrence of the given argument, testing for equality using the equals method.
 	     * @param elem an object
 	     * @return the index of the first occurrence of the argument in this vector; returns -1 if the object is not found.
-	     * @see {@link Object.equals(java.lang.Object}
+	     * @see Object.equals(java.lang.Object
 	     */
 	    public int indexOf(Object elem){
 	        return vector.indexOf(elem);
@@ -122,7 +125,7 @@ public class Vector {
 	     * @param index the index to start searching from.
 	     * @return the index of the first occurrence of the object argument in this vector at position index or later in the vector; returns -1 if the object is not found.
 	     * @throws IndexOutOfBoundsException if index is out of bounds.
-	     * @see {@link Object.equals(java.lang.Object}
+	     * @see Object.equals(java.lang.Object
 	     */
 	    public int indexOf(Object elem, int index) throws IndexOutOfBoundsException {
 	        return vector.indexOf(elem, index);
@@ -134,7 +137,7 @@ public class Vector {
 	     * @param obj the object to insert.
 	     * @param index where to insert the new component.
 	     * @throws ArrayIndexOutOfBoundsException if the index was invalid.
-	     * @see {@link size()}
+	     * @see #size()
 	     */
 	    public void insertElementAt(Object obj, int index) throws ArrayIndexOutOfBoundsException {
 	        vector.insertElementAt(obj, index);
@@ -193,7 +196,7 @@ public class Vector {
 	     * The index must be a value greater than or equal to 0 and less than the current size of the vector.
 	     * @param index the index of the object to remove.
 	     * @throws ArrayIndexOutOfBoundsException if the index was invalid.
-	     * @see {@link size()}
+	     * @see #size()
 	     */
 	    public void removeElementAt(int index) throws ArrayIndexOutOfBoundsException{
 	        vector.removeElementAt(index);
@@ -205,7 +208,7 @@ public class Vector {
 	     * @param obj what the component is to be set to.
 	     * @param index the specified index.
 	     * @throws ArrayIndexOutOfBoundsException if the index was invalid.
-	     * @see {@link size()}
+	     * @see #size()
 	     */
 	    public void setElementAt(Object obj, int index) throws ArrayIndexOutOfBoundsException{
 	        vector.setElementAt(obj, index);

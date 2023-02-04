@@ -6,9 +6,9 @@ import java.util.NoSuchElementException;
  * ListAdapter adapts the {@link Vector} class from Java CLDC1.1 to the {@link HList} interface of Java J2SE1.4.2.
  * This HList implementation has no restriction on the acceptable values, so null is an acceptable value for an item.
  * <p>This is an application of the Adapter design pattern</p>
- * @author Zuech
- * @see {@link HList}
- * @see {@link Vector}
+ * @author Zuech Riccardo
+ * @see HList
+ * @see Vector
  */
 public class ListAdapter implements HList{
 	/**
@@ -52,8 +52,8 @@ public class ListAdapter implements HList{
 	}
 	
 	/**
-     * Constructor used to create a new ListAdapter with the same elements as the provided collection 
-     * @param c collection from which to take elements
+     * Constructor used to create a list with the same elements as the provided collection
+     * @param c collection whose elements populate the list
      */
 	public ListAdapter(HCollection c) {
 		this();
@@ -108,7 +108,6 @@ public class ListAdapter implements HList{
 	}
 	/**
      * Returns an array containing all of the elements in this list in proper sequence.
-     * Obeys the general contract of the Collection.toArray method.
      *
      * @return an array containing all of the elements in this list in proper
      * sequence.
@@ -122,7 +121,6 @@ public class ListAdapter implements HList{
 	}
 	/**
      * Returns an array containing all of the elements in this list in proper sequence.
-     * Obeys the general contract of the Collection.toArray(Object[]) method.
      *
      * @param arrayTarget the array into which the elements of this list are to be
      * stored, if it is big enough; otherwise, a new array of the same runtime type is allocated for this purpose.
@@ -152,7 +150,7 @@ public class ListAdapter implements HList{
      * @param index index at which the specified element is to be inserted.
      * @param element element to be inserted.
      *
-     * @throws IndexOutOfBoundsException - if the index is out of range (index < 0 || index &lt; size()).
+     * @throws IndexOutOfBoundsException - if the index is out of range (index &lt; 0 || index &lt; size()).
      */
 	public void add(int index, Object element) throws IndexOutOfBoundsException {
 		v.insertElementAt(element, index + from);
@@ -213,7 +211,7 @@ public class ListAdapter implements HList{
      * @param coll collection whose elements are to be added to this list.
      * @return true if this list changed as a result of the call.
      *
-     * @throws NullPointerException - if the specified collection contains one or more null elements and this list does not support null elements, or if the specified collection is null.
+     * @throws NullPointerException if the specified collection contains one or more null elements and this list does not support null elements, or if the specified collection is null.
      */
 	public boolean addAll(HCollection c) throws NullPointerException {
 		if(c == null) throw new NullPointerException();
@@ -237,7 +235,7 @@ public class ListAdapter implements HList{
      * @return true if this list changed as a result of the call.
      *
      * @throws NullPointerException if the specified collection contains one or more null elements and this list does not support null elements, or if the specified collection is null.
-     * @throws IndexOutOfBoundsException if the index is out of range (index < 0 || index &lt; size()).
+     * @throws IndexOutOfBoundsException if the index is out of range (index &lt; 0 || index &lt; size()).
 
      */
 	public boolean addAll(int index, HCollection c) throws NullPointerException, IndexOutOfBoundsException {
@@ -349,8 +347,8 @@ public class ListAdapter implements HList{
      * }
      * </pre>
      *
-     * This ensures that list1.equals(list2) implies that list1.hashCode()==list2.hashCode() for any two lists, list1
-     * and list2, as required by the general contract of Object.hashCode.
+     * This ensures that {@code list1.equals(list2)} implies that {@code list1.hashCode() == list2.hashCode()} for any two lists, list1
+     * and list2, as required by the general contract of {@link Object.hashCode}.
      *
      * @return the hash code value for this list.
      */
@@ -370,7 +368,7 @@ public class ListAdapter implements HList{
      * @param index index of element to return.
      * @return the element at the specified position in this list.
      *
-     * @throws IndexOutOfBoundsException if the index is out of range (index < 0|| index &gt;= size()).
+     * @throws IndexOutOfBoundsException if the index is out of range (index &lt; 0 || index &gt;= size()).
      */
 	public Object get(int index) throws IndexOutOfBoundsException {
 		return v.elementAt(from + index);		
@@ -382,7 +380,7 @@ public class ListAdapter implements HList{
      * @param element element to be stored at the specified position.
      * @return the element previously at the specified position.
      *
-     * @throws IndexOutOfBoundsException - if the index is out of range (index < 0 || index &gt;= size()).
+     * @throws IndexOutOfBoundsException - if the index is out of range (index &lt; 0 || index &gt;= size()).
      */
 	public Object set(int index, Object element) throws IndexOutOfBoundsException {
 		if(index+from >= to || index < 0) throw new IndexOutOfBoundsException();
@@ -398,7 +396,7 @@ public class ListAdapter implements HList{
      * @param index the index of the element to removed.
      * @return the element previously at the specified position.
      * 
-     * @throws IndexOutOfBoundsException - if the index is out of range (index < 0 || index &gt;= size()).
+     * @throws IndexOutOfBoundsException - if the index is out of range (index &lt; 0 || index &gt;= size()).
      */
 	public Object remove(int index) throws IndexOutOfBoundsException { 
 		if(index+from >= to || index < 0) throw new IndexOutOfBoundsException();
@@ -453,7 +451,7 @@ public class ListAdapter implements HList{
      * @param index index of first element to be returned from the list iterator (by a call to the next method).
      * @return a list iterator of the elements in this list (in proper sequence), starting at the specified position in this list.
      * 
-     * @throws IndexOutOfBoundsException if the index is out of range (index < 0 || index &lt; size()).
+     * @throws IndexOutOfBoundsException if the index is out of range (index &lt; 0 || index &lt; size()).
      */
 	public HListIterator listIterator(int index) throws IndexOutOfBoundsException {
 		if(index > size() || index < 0) throw new IndexOutOfBoundsException();
@@ -490,19 +488,19 @@ public class ListAdapter implements HList{
      * @return a view of the specified range within this list.
      *
      * @throws IndexOutOfBoundsException for an illegal endpoint index value
-     * (fromIndex < 0 || toIndex &lt; size ||fromIndex &lt; toIndex).
+     * (fromIndex &lt; 0 || toIndex &lt; size || fromIndex &lt; toIndex).
      */
 	public ListAdapter subList(int fromIndex, int toIndex) throws IndexOutOfBoundsException {
 		if(toIndex > size() || fromIndex < 0) throw new IndexOutOfBoundsException();
 		return new ListAdapter(this, fromIndex, toIndex);
 	}
 	/**
-	 * * <p> An iterator for lists that allows the programmer to traverse the list in either direction, modify 
+	 * An iterator for lists that allows the programmer to traverse the list in either direction, modify 
 	 * the list during iteration, and obtain the iterator's current position in the list. A <i>ListIterator</i> 
 	 * has no current element; its <i>cursor position</i> always 
 	 * lies between the element that would be returned by a call to <i>previous()</i> and the element that would be 
 	 * returned by a call to <i>next()</i>. In a list of length <i>n</i>, there are <i>n+1</i> valid index values,
-	 * from <i>0</i> to <i>n</i>, inclusive. </p>
+	 * from <i>0</i> to <i>n</i>, inclusive.
 	 *
 	 * <pre>
 	          Element(0)   Element(1)   Element(2)   ... Element(n)   
