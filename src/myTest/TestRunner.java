@@ -6,7 +6,7 @@ import org.junit.runner.notification.Failure;
 import java.util.*;
 
 /**
- * Main class to execute {@link ListAdapterTest}
+ * Main class to execute {@link ListAdapterTestSuite}
  * <p>
  *
  * <strong>Preconditions</strong>: Object methods are considered in a working status when they are used
@@ -35,7 +35,7 @@ public class TestRunner {
 
     /**
      * Print the test result for every suite case
-     * <p>
+     * <br>
      *
      * For every suite is indicated how many test of the relative suite have been executed and how many failed
      * @param res - The result of the invocation of the test class
