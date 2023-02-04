@@ -2,18 +2,10 @@ package myAdapter;
 
 /**
  *
- * <p>
-An iterator for lists that allows the programmer 
- to traverse the list in either direction, modify 
- the list during iteration, and obtain the iterator's 
- current position in the list. A <i>ListIterator</i> 
- has no current element; its <i>cursor position</i> always 
- lies between the element that would be returned by a call 
- to <i>previous()</i> and the element that would be 
- returned by a call to <i>next()</i>. In a list of 
- length <i>n</i>, there are <i>n+1</i> valid 
- index values, from <i>0</i> to <i>n</i>, inclusive. 
- </p>
+ * <p> An iterator for lists that allows the programmer  to traverse the list in either direction, modify  the list during iteration, and obtain the iterator's 
+ * current position in the list. A <i>ListIterator</i>  has no current element; its <i>cursor position</i> always  lies between the element that would be returned
+ * by a call to <i>previous()</i> and the element that would be  returned by a call to <i>next()</i>. In a list of  length <i>n</i>, there are <i>n+1</i> valid 
+ *  index values, from <i>0</i> to <i>n</i>, inclusive.  </p>
  *
  * <pre>
           Element(0)   Element(1)   Element(2)   ... Element(n)   
@@ -21,12 +13,11 @@ An iterator for lists that allows the programmer
  Index: 0            1            2            3               n+1
 
  </pre>
- * <p>
- Note that the <a href="ListIterator.html#remove()"><code>remove()</code></a> and <a href="ListIterator.html#set(java.lang.Object)"><code>set(Object)</code></a> methods are
- <i>not</i> defined in terms of the cursor position;  they are defined to
- operate on the last element returned by a call to <a href="ListIterator.html#next()"><code>next()</code></a> or <a href="ListIterator.html#previous()"><code>previous()</code></a>.
- </p>
-
+ * <p> Note that the <a href="ListIterator.html#remove()"><code>remove()</code></a> and 
+ * <a href="ListIterator.html#set(java.lang.Object)"><code>set(Object)</code></a> methods are  <i>not</i> defined in terms of the cursor position; 
+ *  they are defined to operate on the last element returned by a call to <a href="ListIterator.html#next()"><code>next()</code></a> or
+ *   <a href="ListIterator.html#previous()"><code>previous()</code></a>.</p>
+ *   
  * @see HCollection
  * @see HList
  * @see HIterator
@@ -93,7 +84,7 @@ public interface HListIterator extends HIterator {
      * the list.)
      *
      * @return the index of the element that would be returned by a subsequent call
-     *         to previous, or -1 if list iterator is at beginning of list.
+     * to previous, or -1 if list iterator is at beginning of list.
      */
     int previousIndex();
 
@@ -104,8 +95,8 @@ public interface HListIterator extends HIterator {
      * ListIterator.add has not been called after the last call to
      * next or previous.
      *
-     *@throws UnsupportedOperationException if the remove operation is not supported by this list iterator.
-     *@throws IllegalStateException neither next nor previous have been called, or remove or add have been called after the last call to * next or previous.
+     * @throws UnsupportedOperationException if the remove operation is not supported by this list iterator.
+     * @throws IllegalStateException neither next nor previous have been called, or remove or add have been called after the last call to * next or previous.
      */
     void remove();
 
@@ -118,10 +109,10 @@ public interface HListIterator extends HIterator {
      * @param obj the element with which to replace the last element returned by
      * next or previous.
      *
-     *@throws UnsupportedOperationException if the set operation is not supported by this list iterator.
-     *@throws IllegalStateException neither next nor previous have been called, or remove or add have been called after the last call to * next or previous.
-     *@throws ClassCastException if the class of the specified element prevents it from being added to this list.
-     *@throws IllegalArgumentException if some aspect of the specified element prevents it from being added to this list.
+     * @throws UnsupportedOperationException if the set operation is not supported by this list iterator.
+     * @throws IllegalStateException neither next nor previous have been called, or remove or add have been called after the last call to * next or previous.
+     * @throws ClassCastException if the class of the specified element prevents it from being added to this list.
+     * @throws IllegalArgumentException if some aspect of the specified element prevents it from being added to this list.
      */
     void set(Object obj);
 

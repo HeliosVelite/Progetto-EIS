@@ -2,67 +2,65 @@ package myAdapter;
 
 /**
  * <p> An ordered collection (also known as a <i>sequence</i>).  The user of this
- interface has precise control over where in the list each element is
- inserted.  The user can access elements by their integer index (position in
- the list), and search for elements in the list.</p>
+ * interface has precise control over where in the list each element is
+ * inserted.  The user can access elements by their integer index (position in
+ * the list), and search for elements in the list.</p>
  *
  * <p> Unlike sets, lists typically allow duplicate elements.  More formally,
- lists typically allow pairs of elements <i>e1</i> and <i>e2</i>
- such that <i>e1.equals(e2)</i>, and they typically allow multiple
- null elements if they allow null elements at all.  It is not inconceivable
- that someone might wish to implement a list that prohibits duplicates, by
- throwing runtime exceptions when the user attempts to insert them, but we
- expect this usage to be rare.</p>
+ * lists typically allow pairs of elements <i>e1</i> and <i>e2</i>
+ * such that <i>e1.equals(e2)</i>, and they typically allow multiple
+ * null elements if they allow null elements at all.  It is not inconceivable
+ * that someone might wish to implement a list that prohibits duplicates, by
+ * throwing runtime exceptions when the user attempts to insert them, but we
+ * expect this usage to be rare.</p>
  * 
  * <p> The <i>List</i> interface places additional stipulations, beyond those
- specified in the <i>Collection</i> interface, on the contracts of the
- <i>iterator</i>, <i>add</i>, <i>remove</i>, <i>equals</i>, and
- <i>hashCode</i> methods.  Declarations for other inherited methods are
- also included here for convenience.</p>
+ * specified in the <i>Collection</i> interface, on the contracts of the
+ * <i>iterator</i>, <i>add</i>, <i>remove</i>, <i>equals</i>, and
+ * <i>hashCode</i> methods.  Declarations for other inherited methods are
+ * also included here for convenience.</p>
  * 
  * <p> The <i>List</i> interface provides four methods for positional (indexed)
- access to list elements.  Lists (like Java arrays) are zero based.  Note
- that these operations may execute in time proportional to the index value
- for some implementations (the <i>LinkedList</i> class, for
- example). Thus, iterating over the elements in a list is typically
- preferable to indexing through it if the caller does not know the
- implementation.</p>
+ * access to list elements.  Lists (like Java arrays) are zero based.  Note
+ * that these operations may execute in time proportional to the index value
+ * for some implementations (the <i>LinkedList</i> class, for
+ * example). Thus, iterating over the elements in a list is typically
+ * preferable to indexing through it if the caller does not know the
+ * implementation.</p>
  * 
  * <p> The <i>List</i> interface provides a special iterator, called a
- <i>ListIterator</i>, that allows element insertion and replacement, and
- bidirectional access in addition to the normal operations that the
- <i>Iterator</i> interface provides.  A method is provided to obtain a
- list iterator that starts at a specified position in the list.</p>
+ * <i>ListIterator</i>, that allows element insertion and replacement, and
+ * bidirectional access in addition to the normal operations that the
+ * <i>Iterator</i> interface provides.  A method is provided to obtain a
+ * list iterator that starts at a specified position in the list.</p>
  *
  * <p> The <i>List</i> interface provides two methods to search for a specified
- object.  From a performance standpoint, these methods should be used with
- caution.  In many implementations they will perform costly linear
- searches.</p>
+ * object.  From a performance standpoint, these methods should be used with
+ * caution.  In many implementations they will perform costly linear
+ * searches.</p>
  * 
  * <p> The <i>List</i> interface provides two methods to efficiently insert and
- remove multiple elements at an arbitrary point in the list.</p>
+ * remove multiple elements at an arbitrary point in the list.</p>
  *
  * <p> Note: While it is permissible for lists to contain themselves as elements,
- extreme caution is advised: the <i>equals</i> and <i>hashCode</i>
- methods are no longer well defined on a such a list.
-
- </p>
+ * extreme caution is advised: the <i>equals</i> and <i>hashCode</i>
+ * methods are no longer well defined on a such a list.
+ *</p>
  * 
  * <p> Some list implementations have restrictions on the elements that
- they may contain.  For example, some implementations prohibit null elements,
- and some have restrictions on the types of their elements.  Attempting to
- add an ineligible element throws an unchecked exception, typically
- <i>NullPointerException</i> or <i>ClassCastException</i>.  Attempting
- to query the presence of an ineligible element may throw an exception,
- or it may simply return false; some implementations will exhibit the former
- behavior and some will exhibit the latter.  More generally, attempting an
- operation on an ineligible element whose completion would not result in
- the insertion of an ineligible element into the list may throw an
- exception or it may succeed, at the option of the implementation.
- Such exceptions are marked as "optional" in the specification for this
- interface. 
-
- </p>
+ * they may contain.  For example, some implementations prohibit null elements,
+ * and some have restrictions on the types of their elements.  Attempting to
+ * add an ineligible element throws an unchecked exception, typically
+ * <i>NullPointerException</i> or <i>ClassCastException</i>.  Attempting
+ * to query the presence of an ineligible element may throw an exception,
+ * or it may simply return false; some implementations will exhibit the former
+ * behavior and some will exhibit the latter.  More generally, attempting an
+ * operation on an ineligible element whose completion would not result in
+ * the insertion of an ineligible element into the list may throw an
+ * exception or it may succeed, at the option of the implementation.
+ * Such exceptions are marked as "optional" in the specification for this
+ * interface. 
+ * </p>
  *
  * @see HCollection
  */

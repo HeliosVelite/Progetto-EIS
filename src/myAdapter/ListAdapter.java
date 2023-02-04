@@ -2,6 +2,14 @@ package myAdapter;
 
 import java.util.NoSuchElementException;
 
+/**
+ * ListAdapter adapts the {@link Vector} class from Java CLDC1.1 to the {@link HList} interface of Java J2SE1.4.2.
+ * This HList implementation has no restriction on the acceptable values, so null is an acceptable value for an item.
+ * <p>This is an application of the Adapter design pattern</p>
+ * @author Zuech
+ * @see {@link HList}
+ * @see {@link Vector}
+ */
 public class ListAdapter implements HList{
 	/**
 	 * The vector working as adaptee for the HList interface
@@ -17,8 +25,9 @@ public class ListAdapter implements HList{
 	 * If this list is not a sublist, then they are set to 0 and this.size() respectively
 	 */
 	private int from, to;
+	
 	/**
-	 * Constructor for an empty list.
+	 * Default constructor, creates an empty list.
 	 */
 	public ListAdapter() {
 		v = new Vector();
@@ -27,7 +36,7 @@ public class ListAdapter implements HList{
 		to = 0;
 	}
 	/**
-	 * Private constructor used for the subList method
+	 * Private constructor used in the subList method.
 	 * @param mother the list from which the subList is to be derived
 	 * @param fromIndex low endpoint of the subList
 	 * @param toIndex high endpoint of the subList
@@ -42,6 +51,10 @@ public class ListAdapter implements HList{
 		to = toIndex + mother.from;
 	}
 	
+	/**
+     * Constructor used to create a new ListAdapter with the same elements as the provided collection 
+     * @param c collection from which to take elements
+     */
 	public ListAdapter(HCollection c) {
 		this();
 		HIterator i = c.iterator();
@@ -70,6 +83,7 @@ public class ListAdapter implements HList{
      * returns true if and only if this list contains at least one element e such that (o==null ? e==null : o.equals(e)).
      *
      * @param obj element whose presence in this list is to be tested.
+     * 
      * @return true if this list contains the specified element.
      */
 	public boolean contains(Object o) {
@@ -132,7 +146,7 @@ public class ListAdapter implements HList{
 	}
 	/**
      * Inserts the specified element at the specified position in this list
-     * (optional operation). Shifts the element currently at that position (if any)
+     *. Shifts the element currently at that position (if any)
      * and any subsequent elements to the right (adds one to their indices).
      *
      * @param index index at which the specified element is to be inserted.
@@ -140,12 +154,12 @@ public class ListAdapter implements HList{
      *
      * @throws IndexOutOfBoundsException - if the index is out of range (index < 0 || index &lt; size()).
      */
-	public void add(int index, Object element) {
+	public void add(int index, Object element) throws IndexOutOfBoundsException {
 		v.insertElementAt(element, index + from);
 		updateRange(1);
 	}
 	/**
-     * Appends the specified element to the end of this list (optional operation).
+     * Appends the specified element to the end of this list.
      *
      * @param obj element to be appended to this list.
      * @return true (as per the general contract of the Collection.add method).
@@ -155,7 +169,7 @@ public class ListAdapter implements HList{
 		return true;
 	}
 	/**
-     * Removes the first occurrence in this list of the specified element (optional operation).
+     * Removes the first occurrence in this list of the specified element.
      * If this list does not contain the element, it is unchanged. More formally,
      * removes the element with the lowest index i such that (o==null ? get(i)==null : o.equals(get(i)))
      * (if such an element exists).
@@ -192,7 +206,7 @@ public class ListAdapter implements HList{
 	/**
      * Appends all of the elements in the specified collection to the end of this
      * list, in the order that they are returned by the specified collection's
-     * iterator (optional operation). The behavior of this operation is unspecified
+     * iterator. The behavior of this operation is unspecified
      * if the specified collection is modified while the operation is in progress.
      * (Note that this will occur if the specified collection is this list, and it's nonempty.)
      *
@@ -210,7 +224,7 @@ public class ListAdapter implements HList{
 	}
 	/**
      * Inserts all of the elements in the specified collection into this list at the
-     * specified position (optional operation). Shifts the element currently at that
+     * specified position. Shifts the element currently at that
      * position (if any) and any subsequent elements to the right (increases their
      * indices). The new elements will appear in this list in the order that they
      * are returned by the specified collection's iterator. The behavior of this
@@ -237,12 +251,12 @@ public class ListAdapter implements HList{
 		return true;
 	}
 	/**
-     * Removes from this list all the elements that are contained in the specified collection (optional operation).
+     * Removes from this list all the elements that are contained in the specified collection.
      *
      * @param coll collection that defines which elements will be removed from this list.
      * @return true if this list changed as a result of the call.
      *
-     * @throws NullPointerException - if the specified collection is null.
+     * @throws NullPointerException  if the specified collection is null.
      */
 	public boolean removeAll(HCollection c) throws NullPointerException {
 		if(c == null) throw new NullPointerException();
@@ -258,7 +272,7 @@ public class ListAdapter implements HList{
 	}
 	/**
      * Retains only the elements in this list that are contained in the specified
-     * collection (optional operation). In other words, removes from this list all
+     * collection. In other words, removes from this list all
      * the elements that are not contained in the specified collection.
      *
      * @param coll collection that defines which elements this set will retain.
@@ -281,7 +295,7 @@ public class ListAdapter implements HList{
 		return changed;
 	}
 	/**
-     * Removes all of the elements from this list (optional operation). This list will be empty after this call returns (unless it throws an exception).
+     * Removes all of the elements from this list. This list will be empty after this call returns (unless it throws an exception).
      *
      */
 	public void clear() {
@@ -362,7 +376,7 @@ public class ListAdapter implements HList{
 		return v.elementAt(from + index);		
 	}
 	/**
-     * Replaces the element at the specified position in this list with the specified element (optional operation).
+     * Replaces the element at the specified position in this list with the specified element.
      *
      * @param index index of element to replace.
      * @param element element to be stored at the specified position.
@@ -377,7 +391,7 @@ public class ListAdapter implements HList{
 		return prev;
 	}
 	/**
-     * Removes the element at the specified position in this list (optional operation).
+     * Removes the element at the specified position in this list.
      * Shifts any subsequent elements to the left (subtracts one from their indices).
      * Returns the element that was removed from the list.
      *
@@ -482,20 +496,73 @@ public class ListAdapter implements HList{
 		if(toIndex > size() || fromIndex < 0) throw new IndexOutOfBoundsException();
 		return new ListAdapter(this, fromIndex, toIndex);
 	}
+	/**
+	 * * <p> An iterator for lists that allows the programmer to traverse the list in either direction, modify 
+	 * the list during iteration, and obtain the iterator's current position in the list. A <i>ListIterator</i> 
+	 * has no current element; its <i>cursor position</i> always 
+	 * lies between the element that would be returned by a call to <i>previous()</i> and the element that would be 
+	 * returned by a call to <i>next()</i>. In a list of length <i>n</i>, there are <i>n+1</i> valid index values,
+	 * from <i>0</i> to <i>n</i>, inclusive. </p>
+	 *
+	 * <pre>
+	          Element(0)   Element(1)   Element(2)   ... Element(n)   
+	        ^            ^            ^            ^               ^
+	 Index: 0            1            2            3               n+1
 	
+	 </pre>
+	 * <p> Note that the <a href="ListIterator.html#remove()"><code>remove()</code></a> and
+	 * <a href="ListIterator.html#set(java.lang.Object)"><code>set(Object)</code></a> methods are
+	 * <i>not</i> defined in terms of the cursor position;  they are defined to operate on the last element returned
+	 * by a call to <a href="ListIterator.html#next()"><code>next()</code></a> or
+	 * <a href="ListIterator.html#previous()"><code>previous()</code></a>.</p>
+	
+	 * @see HCollection
+	 * @see HList
+	 * @see HIterator
+	 * 
+	 * @author Zuech
+	 */
 	public class ListAdapterIterator implements HListIterator {
 		private int cursor;
+		/**
+		 * Attribute used to keep memory of the cursor value at last set/next call. It's set to -1 if next or set
+		 * have not been called yet.
+		 */
 		private int lastCall;
+		/**
+		 * Default constructor: creates an iterator whose cursor is placed at the beginning of the list, before the first
+		 * element.
+		 */
 		public ListAdapterIterator() {
 			this(0);
 		}
+		/**
+		 * Default constructor: creates an iterator whose cursor is placed at the specified index.
+		 */
 		public ListAdapterIterator(int index) {
 			cursor = index;
 			lastCall = -1;
 		}
+		/**
+	     * Returns true if this list iterator has more elements when traversing
+	     * the list in the forward direction. (In other words, returns true if
+	     * next would return an element rather than throwing an exception.)
+	     *
+	     * @return true if the list iterator has more elements when traversing
+	     * the list in the forward direction.
+	     */
 		public boolean hasNext() {
 			return cursor < size();
 		}
+		/**
+	     * Returns the next element in the list. This method may be called repeatedly to
+	     * iterate through the list, or intermixed with calls to previous to go
+	     * back and forth. (Note that alternating calls to next and
+	     * previous will return the same element repeatedly.)
+	     *
+	     * @return the next element in the list.
+	     * @throws NoSuchElementException - if the iteration has no next element.
+	     */
 		public Object next() throws NoSuchElementException {
 			if(!hasNext()) throw new NoSuchElementException();
 			lastCall = cursor;
@@ -503,35 +570,103 @@ public class ListAdapter implements HList{
 			cursor++;
 			return e;
 		}
+		/**
+	     * Returns true if this list iterator has more elements when traversing
+	     * the list in the reverse direction. (In other words, returns true if
+	     * previous would return an element rather than throwing an exception.)
+	     *
+	     * @return true if the list iterator has more elements when traversing
+	     *         the list in the reverse direction.
+	     */
 		public boolean hasPrevious() {
 			return cursor > 0; 
 		}
+		/**
+	     * Returns the previous element in the list. This method may be called
+	     * repeatedly to iterate through the list backwards, or intermixed with calls to
+	     * next to go back and forth. (Note that alternating calls to
+	     * next and previous will return the same element repeatedly.)
+	     *
+	     * @return the previous element in the list.
+	     *
+	     * @throws NoSuchElementException - if the iteration has no next element.
+	     */
 		public Object previous() throws NoSuchElementException {
 			if(!hasPrevious()) throw new NoSuchElementException();
 			cursor -= 1;
 			lastCall = cursor;
 			return get(cursor);
 		}
+		/**
+	     * Returns the index of the element that would be returned by a subsequent call
+	     * to next. (Returns list size if the list iterator is at the end of
+	     * the list.)
+	     *
+	     * @return the index of the element that would be returned by a subsequent call
+	     * to next, or list size if list iterator is at end of list.
+	     */
 		public int nextIndex() {
 			if(hasNext())
 				return cursor;
 			return size();
 		}
+		/**
+	     * Returns the index of the element that would be returned by a subsequent call
+	     * to previous. (Returns -1 if the list iterator is at the beginning of
+	     * the list.)
+	     *
+	     * @return the index of the element that would be returned by a subsequent call
+	     * to previous, or -1 if list iterator is at beginning of list.
+	     */
 		public int previousIndex() {
 			if(hasPrevious())
 				return cursor - 1;
 			return -1;
 		}
+		/**
+	     * Removes from the list the last element that was returned by next or
+	     * previous (optional operation). This call can only be made once per
+	     * call to next or previous. It can be made only if
+	     * ListIterator.add has not been called after the last call to
+	     * next or previous.
+	     *
+	     * @throws IllegalStateException neither next nor previous have been called, or remove or add have been called after the last call to * next or previous.
+	     */
 		public void remove() throws IllegalStateException {
 			if(lastCall < 0) throw new IllegalStateException();
 			ListAdapter.this.remove(lastCall);
 			if(cursor > lastCall) cursor--;
 			lastCall = -1;
 		}
+		/**
+	     * Replaces the last element returned by next or previous with
+	     * the specified element (optional operation). This call can be made only if
+	     * neither ListIterator.remove nor ListIterator.add have been
+	     * called after the last call to next or previous.
+	     *
+	     * @param obj the element with which to replace the last element returned by
+	     * next or previous.
+	     *
+	     * @throws IllegalStateException neither next nor previous have been called, or remove or add have been called after the last call to * next or previous.
+	     */
 		public void set(Object o) throws IllegalStateException {
 			if(lastCall <0) throw new IllegalStateException();
-			ListAdapter.this.set(lastCall, o);
+			ListAdapter.this
+			.set(lastCall, o);
 		}
+		/**
+	     * Inserts the specified element into the list (optional operation). The element
+	     * is inserted immediately before the next element that would be returned by
+	     * next, if any, and after the next element that would be returned by
+	     * previous, if any. (If the list contains no elements, the new element
+	     * becomes the sole element on the list.) The new element is inserted before the
+	     * implicit cursor: a subsequent call to next would be unaffected, and
+	     * a subsequent call to previous would return the new element. (This
+	     * call increases by one the value that would be returned by a call to
+	     * nextIndex or previousIndex.)
+	     *
+	     * @param obj the element to insert.
+	     */
 		public void add(Object o) {
 			ListAdapter.this.add(cursor, o);
 			cursor++;

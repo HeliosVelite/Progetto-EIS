@@ -1,9 +1,7 @@
 package myAdapter;
 
 /**
- *  An iterator over a collection. Iterator takes the place of Enumeration in
- * the Java collections framework. Iterators differ from enumerations in two
- * ways:
+ *  An iterator over a collection. Iterator takes the place of Enumeration in the Java collections framework. Iterators differ from enumerations in two ways:
  * <ul>
  * <li>Iterators allow the caller to remove elements from the underlying
  * collection during the iteration with well-defined semantics.
