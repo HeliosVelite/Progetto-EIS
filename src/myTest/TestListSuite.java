@@ -8,7 +8,9 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import myAdapter.HCollection;
+import myAdapter.HIterator;
 import myAdapter.HList;
+import myAdapter.HListIterator;
 import myAdapter.ListAdapter;
 
 /**
@@ -231,15 +233,372 @@ public class TestListSuite {
 		assertTrue("IndexOutOfBoundsException should be thrown when invoking get with an index greater or equal to the list size.",exceptionThrown);
 	}
     /**
+     * <b>Summary</b>: test case for indexOf(Object o) method
+     * <br>
+     * <b>Test Case Design</b>: test the indexOf(Object o) method on non-repetitive pokedex list and on a repetitive pokedex list.
+     * <br>
+     * <b>Test Description</b>: test the returned index for each pokemon in a non-repetitive pokedex list and test the first occurrence by adding an
+     * already contained pokemon to the pokedex list. Also test the method on not contained pokemon.
+     * <br>
+     * <b>Pre-Condition</b>: the list is populated with every pokemon in the pokedex
+     * <br>
+     * <b>Post-Condition</b>: the list is still populated with every pokemon in the pokedex, but with an extra Charmander at the end.
+     * <br>
+     * <b>Expected Results</b>: each element's first occurrence in the list should be the index occupied by the element in the pokedex array. Not contained
+     * elements return -1 and adding an already contained pokemon doesn't change the value returned by the method, in other words only the index of the first
+     * occurrence is returned.
+     */
+	@Test
+	public void testIndexOf() {
+		for(int i = 0; i < pokedex.length; i++) {
+			boolean sameMon = i == list.indexOf(pokedex[i]);
+			assertTrue("An unmodified non-repetitive list should have the first occurance of each element in the same position as its initialisation colelction.", sameMon);
+		}
+		boolean unlisted = list.indexOf("Magearna") == -1;
+		assertTrue("The first occurance of an uncontained element should be returned as -1 (invalid index).", unlisted);
+		list.add("Charmander");
+		boolean isLastIndex = list.indexOf("Charmander") == (list.size() - 1);
+		assertFalse("A repetitive list should return as index the first occurrance of a repetitive element.", isLastIndex);
+	}
+    /**
+     * <b>Summary</b>: test case for isEmpty() method
+     * <br>
+     * <b>Test Case Design</b>: test the isEmpty() method on an empty list and a pokedex list
+     * <br>
+     * <b>Test Description</b>: test emptiness of an empty list (emptiness corresponds to zero size) and a pokedex list
+     * <br>
+     * <b>Pre-Condition</b>: emptylist is empty and the pokedex list is populated with every pokemon in the pokedex.
+     * <br>
+     * <b>Post-Condition</b>: emptylist is still empty and the pokedex list is still populated with every pokemon in the pokedex.
+     * <br>
+     * <b>Expected Results</b>: the "empty list" is empty and zero sized, while the pokedex list is not
+     */
+	@Test
+	public void testIsEmpty() {
+		boolean zeroSize = emptylist.size() == 0;
+		assertTrue("An empty list should be zero sized and isEmpty() should return true.", emptylist.isEmpty() && zeroSize);
+		zeroSize = list.size() == 0;
+		assertTrue("A populated list should not be zero sized and isEmpty() should not return true.", !list.isEmpty() && !zeroSize);
+	}
+	 /**
+     * <b>Summary</b>: test case for lastIndexOf(Object o) method
+     * <br>
+     * <b>Test Case Design</b>: test the lastIndexOf(Object o) method on non-repetitive pokedex list and on a repetitive pokedex list.
+     * <br>
+     * <b>Test Description</b>: test the returned index for each pokemon in a non-repetitive pokedex list and test the last occurrence by adding an
+     * already contained pokemon to the pokedex list. Also test the method on not contained pokemon.
+     * <br>
+     * <b>Pre-Condition</b>: the list is populated with every pokemon in the pokedex
+     * <br>
+     * <b>Post-Condition</b>: the list is still populated with every pokemon in the pokedex, but with an extra Charmander at the end.
+     * <br>
+     * <b>Expected Results</b>: each element's last occurrence in the non-modified list should be the index occupied by the element in the pokedex array.
+     * Not contained elements return -1 and adding an already contained element changes the value returned by the method, in other words only the index of 
+     * the last occurrence is returned.
+     */
+	@Test
+	public void testLastIndexOf() {
+		for(int i = 0; i < pokedex.length; i++) {
+			boolean sameMon = i == list.lastIndexOf(pokedex[i]);
+			assertTrue("An unmodified non-repetitive list should have the last occurance of each element in the same position as its initialisation colelction.", sameMon);
+			
+		}
+		boolean unlisted = list.lastIndexOf("Magearna") == -1;
+		assertTrue("The last occurance of an uncontained element should be returned as -1 (invalid index).", unlisted);
+		list.add("Charmander");
+		boolean isLastIndex = list.lastIndexOf("Charmander") == (list.size() - 1);
+		assertTrue("After adding an already contained element, a list should have the element's last occurrence at its end.", isLastIndex);
+	}
+    /**
+     * <b>Summary</b>: test case for size() method
+     * <br>
+     * <b>Test Case Design</b>: test the size() method on a pokedex list and an empty list.
+     * <br>
+     * <b>Test Description</b>: test the size of the pokedex list, then the size of the empty list
+     * <br>
+     * <b>Pre-Condition</b>: one list is populated with every pokemon in the pokedex and the other is empty
+     * <br>
+     * <b>Post-Condition</b>: one list is still populated with every pokemon in the pokedex and the other is still empty
+     * <br>
+     * <b>Expected Results</b>: the pokedex list's size is the same as the pokedex array; the empty list size is zero
+     */
+	@Test
+	public void testSize() {
+		boolean sameSize = pokedex.length == list.size();
+		assertTrue("An un-modified list should have the same size as its initialisation collection.",  sameSize);
+		sameSize = 0 == (new ListAdapter()).size();
+		assertTrue("An empty list size should be zero.", sameSize);
+	}
+    /**
+     * <b>Summary</b>: test case for the toArray() method
+     * <br>
+     * <b>Test Case Design</b>: test the toArray() method on a pokedex list and an empty list
+     * <br>
+     * <b>Test Description</b>: test correspondence between returned array items and list items for the populated pokedex list
+	 * list and the empty list
+     * <br>
+    * <b>Pre-Condition</b>: one list is populated with every pokemon in the pokedex and the other is empty
+     * <br>
+     * <b>Post-Condition</b>: one list is still populated with every pokemon in the pokedex and the other is still empty
+     * <br>
+     * <b>Expected Results</b>: the pokedex list returns a copy of the pokedex array, while the empty list returns an empty array
+     */
+	@Test
+	public void testToArray() {
+		assertArrayEquals("The array returned by an un-modified list should be the same as the array it is initialized from.", pokedex, list.toArray());
+		boolean zeroSize = emptylist.toArray().length == 0;
+		assertTrue("An empty list should return an empty array.", zeroSize && emptylist.isEmpty());
+	}
+	 /**
+     * <b>Summary</b>: test case for the toArray(Object[] arrayTarget) method
+     * <br>
+     * <b>Test Case Design</b>: test the toArray(Object[] arrayTarget) method on a pokedex list
+     * <br>
+     * <b>Test Description</b>: test the presence of each element of the pokedex list in arrayTarget.
+     * Notable test edge-cases are using null, an array smaller than the pokedex list's size, and an array bigger as arrayTarget.
+     * <br>
+    * <b>Pre-Condition</b>: one list is populated with every pokemon in the pokedex
+     * <br>
+     * <b>Post-Condition</b>: one list is still populated with every pokemon in the pokedex
+     * <br>
+     * <b>Expected Results</b>: each element contained in the list is present in the returned arrayTarget. Using null as arrayTarget 
+     * throws NullPointerException. Using a smaller array returns a new array and using a bigger array fills it with null after the last element of the list.
+     */
+	@Test
+	public void testToArrayWithTarget() {
+		boolean exceptionThrown = false;
+		try {
+			list.toArray(null);
+		}
+		catch(NullPointerException e) {
+			exceptionThrown = true;
+		}
+		assertTrue("NullPointerException should be thrown when using null as arrayTarget.", exceptionThrown);
+		
+		Object[] a = new Object[list.size() - 1];
+		Object[] b = list.toArray(a);
+		assertFalse("The toArray(Object[] arrayTarget) method should return a different array from arrayTarget if it has not enough storing space.", a.equals(b));
+		for(int i = 0; i < b.length; i++) {
+			boolean sameIndex = i == list.indexOf(b[i]);
+			assertTrue("The returned arrayTarget should contain each element of the list in the correct position.", sameIndex);
+		}
+		a = new Object[list.size() + 100];
+		b = list.toArray(a);
+		assertTrue("The toArray(Object[] arrayTarget) method should return the same arrayTarget if it has enough storing space.", a.equals(b));
+		for(int i = 0; i < b.length; i++) {
+			if(i >= list.size()) {
+				assertEquals("The returned array should be filled with null after the last element of the list.", b[i], null);
+			}
+			else {
+				boolean sameIndex = i == list.indexOf(b[i]);
+				assertTrue("The returned arrayTarget should contain each element of the list in the correct position.", sameIndex);
+			}
+		}
+	}
+	/**
+     * <b>Summary</b>: test case for the hashCode() method
+     * <br>
+     * <b>Test Case Design</b>: test the hashCode() method on a pokedex list and an empty list
+     * <br>
+     * <b>Test Description</b>: test the hassCode() method on the pokedex list and an empty list by comparing its return value with the hashCode algorithm 
+     * value for lists.
+     * <br>
+     * <b>Pre-Condition</b>: one list is populated with every pokemon in the pokedex and the other is empty
+     * <br>
+     * <b>Post-Condition</b>: one list is still populated with every pokemon in the pokedex and the other is still empty
+     * <br>
+     * <b>Expected Results</b>: the algorithm-generated and method-returned values are the same for both the pokedex list and the empty list
+     */
+	@Test
+	public void testHashCode() {
+		int hashCode = 1;
+		HIterator i = list.iterator();
+		while (i.hasNext()) {
+			Object obj = i.next();
+			hashCode = 31*hashCode + (obj==null ? 0 : obj.hashCode());
+		}
+		boolean equalCodes = hashCode == list.hashCode();
+		assertTrue("The hashCode() method should return the same value as the hash code algorithm for lists.", equalCodes);
+		hashCode = 1;
+		i = emptylist.iterator();
+		while (i.hasNext()) {
+			Object obj = i.next();
+			hashCode = 31*hashCode + (obj==null ? 0 : obj.hashCode());
+		}
+		equalCodes = hashCode == emptylist.hashCode();
+		assertTrue("The hashCode() method should return the same value as the hash code algorithm for lists.", equalCodes);
+	}
+    /**
+     * <b>Summary</b>: test case for the add(Object o) method
+     * <br>
+     * <b>Test Case Design</b>: test the add(Object o) method using a pokedex list
+     * <br>
+     * <b>Test Description</b>:  test the addition of a new pokemon at the end of the pokedex list, checking in particular the difference in size of the list
+     * and the position of the added element
+     * <br>
+     * <b>Pre-Condition</b>: the list is populated with every pokemon in the pokedex
+     * <br>
+     * <b>Post-Condition</b>: the list is still populated with every pokemon in the pokedex plus the one added
+     * <br>
+     * <b>Expected Results</b>: the new pokemon is added at the end of the list, making it grow by 1 in size
+     */
+	@Test
+	public void testAdd() {
+		int pSize = list.size();
+		assertTrue("A call to the add(Object o) method of a list should always be successful.", list.add("Arcanine"));
+		boolean grew = pSize < list.size();
+		assertTrue("The call to add(Objecy o) should add the object o, making the list grow in size by 1.", grew);
+		boolean lastElement = list.lastIndexOf("Arcanine") == (list.size() - 1);
+		assertTrue("The last occurrence of an element just added to a list by add(Object o) should be at the end of the list.", lastElement);
+	}
+    /**
+     * <b>Summary</b>: test case for the add(int index, Object o) method
+     * <br>
+     * <b>Test Case Design</b>: test the add(int index, Object o) method using a pokedex list
+     * <br>
+     * <b>Test Description</b>:  test the addition of a new pokemon at the specified index of the pokedex list, making the list grow
+	 * in size and shifting already contained items to the right. Test indexes out of bounds.
+     * <br>
+     * <b>Pre-Condition</b>: the list is populated with every pokemon in the pokedex
+     * <br>
+     * <b>Post-Condition</b>: the list is still populated with every pokemon in the pokedex plus Arcanine
+     * <br>
+     * <b>Expected Results</b>: the new pokemon is added at the provided index, making it grow by 1 in size and shifting the other items to the right. Calling
+     * the method with an index out of bounds throws IndexOutOfBoundsException
+     */
+	@Test
+	public void testAddAtIndex() {
+		boolean exceptionThrown = false;
+		try {
+			list.add(-1, "Arcanine");
+		}
+		catch(IndexOutOfBoundsException e) {
+			exceptionThrown = true;
+		}
+		assertTrue("Using a negative index should throw IndexOutOfBoundsException.", exceptionThrown);
+		exceptionThrown = false;
+		try {
+			list.add(list.size() + 1, "Arcanine");
+		}
+		catch(IndexOutOfBoundsException e) {
+			exceptionThrown = true;
+		}
+		assertTrue("Using an index greater than the list's size should throw IndexOutOfBoundsException.", exceptionThrown);
+		int pSize = list.size();
+		list.add(3, "Arcanine");
+		boolean grew = pSize < list.size();
+		assertTrue("The call to add(int index, Objecy o) should add the object o at the provided index, making the list grow in size by 1.", grew);
+		assertEquals("The element should be added at the provided index.", "Arcanine", list.get(3));
+		for(int i = 4; i < pokedex.length; i++) {
+			boolean hasShifted = i < list.indexOf(pokedex[i]);
+			assertTrue("Elements from the provided index should have been shifted to the right.", hasShifted);
+		}
+	}
+	/**
+     * <b>Summary</b>: test case for the addAll(HCollection c) method
+     * <br>
+     * <b>Test Case Design</b>: test the addAll(HCollection c) method using a pokedex list and an empty list
+     * <br>
+     * <b>Test Description</b>:  test the addition of a second pokedex collection at the end of the pokedex list and the empty list, making the lists grow
+	 * in size by the size of the pokedex collection. Test the addition of null as c.
+     * <br>
+     * <b>Pre-Condition</b>: the list is populated with every pokemon in the pokedex and the other list is empty
+     * <br>
+     * <b>Post-Condition</b>: the list is populated with every pokemon in the pokedex, but a second pokedex is appended at the end; the empty list is now
+     * populated with every pokemon in the pokedex
+     * <br>
+     * <b>Expected Results</b>: the new pokedex is added at the end of the lists, making them grow by the pokedex collection in size. Calling
+     * the method with null as the collection throws NullPointerException.
+     */
+	@Test
+	public void testAddAll() {
+		boolean exceptionThrown = false;
+		try {
+			list.addAll(null);
+		}
+		catch(NullPointerException e) {
+			exceptionThrown = true;
+		}
+		assertTrue("Using null as the collection to add should throw NullPointerException..", exceptionThrown);
+		HList pokedexList = new ListAdapter(list);
+		int pSize = emptylist.size();
+		assertTrue("The addAll(HCollection c) method should always change the list.", emptylist.addAll(pokedexList));
+		boolean grew = pSize < emptylist.size();
+		assertTrue("The addAll(HCollection c) method should make the list grow.", grew);
+		boolean same = emptylist.size() == pokedexList.size();
+		assertTrue("The addAll(HCollection c) method should increase the size of the list by the size of the collection.", same);
+		assertEquals("Adding a list to an empty list should make the two lists equals.", list, emptylist);
+		pSize = list.size();
+		assertTrue("The addAll(HCollection c) method should always change the list.", list.addAll(pokedexList));
+		grew = pSize < list.size();
+		assertTrue("The addAll(HCollection c) method should make the list grow.", grew);
+		same = list.size() == pSize + pokedexList.size();
+		assertTrue("The addAll(HCollection c) method should increase the size of the list by the size of the collection.", same);
+		HListIterator i = pokedexList.listIterator();
+		while(i.hasNext())
+			assertEquals("The collection should have been added at the end of the list.", list.get(i.nextIndex() + pSize), i.next());
+		
+	}
+	/**
+     * <b>Summary</b>: test case for the add(int index, HCollection c) method
+     * <br>
+     * <b>Test Case Design</b>: test the add(int index, HCollection c) method using a pokedex list and an empty list
+     * <br>
+     * <b>Test Description</b>:  test the addition of a new collection of pokemon at the specified index of the pokedex list and the empty list, making them grow
+	 * in size and shifting already contained items to the right. Test indexes out of bounds.
+     * <br>
+     * <b>Pre-Condition</b>: one list is populated with every pokemon in the pokedex 
+     * <br>
+     * <b>Post-Condition</b>: the list is populated with every pokemon in the pokedex, but a second pokedex is appended at the specified index;
+     * the empty list is now populated with every pokemon in the pokedex
+     * <br>
+     * <b>Expected Results</b>: the new pokedex collection is added at the provided indexes, making the lists grow by the collection's size 
+     * and shifting the other items to the right. Calling the method with an index out of bounds throws IndexOutOfBoundsException
+     */
+	@Test
+	public void testAddAllAtIndex() {
+		boolean exceptionThrown = false;
+		try {
+			list.add(-1, list);
+		}
+		catch(IndexOutOfBoundsException e) {
+			exceptionThrown = true;
+		}
+		assertTrue("Using a negative index should throw IndexOutOfBoundsException.", exceptionThrown);
+		exceptionThrown = false;
+		try {
+			list.add(list.size() + 1, list);
+		}
+		catch(IndexOutOfBoundsException e) {
+			exceptionThrown = true;
+		}
+		assertTrue("Using an index greater than the list's size should throw IndexOutOfBoundsException.", exceptionThrown);
+		assertTrue("The addAll(int index, HCollection c) method should always change the list.", emptylist.addAll(0, list));
+		boolean grew = emptylist.size() == list.size();
+		assertTrue("The addAll(HCollection c) method should make the list grow.", grew);
+		assertEquals("Adding a list to an empty list should make it equal to that list.", list, emptylist);
+		
+		assertTrue("The addAll(int index, HCollection c) method should always change the list.", list.addAll(3, emptylist));
+		for(int i = 0; i < list.size(); i++) {
+			if(i < 3)
+				assertEquals("Elements before the index in the list should be the same as before the call to addAll(int index, HCollection c)", pokedex[i], list.get(i));
+			else if (i >= 3 + emptylist.size())
+				assertEquals("Elements after the index + size of the collection in the list should be shifted to the right by the size of the added collection.", pokedex[i - emptylist.size()], list.get(i));
+			else {
+				assertEquals("Elements between the index and the index + size of the collection in the list should be the same as te elements in the colelction.", emptylist.get(i - 3), list.get(i));
+			}
+		}
+	}
+    /**
      * <b>Summary</b>:
      * <br>
      * <b>Test Case Design</b>: 
      * <br>
      * <b>Test Description</b>: 
      * <br>
-     * <b>Pre-Condition</b>: the list is populated with every pokemon in the pokedex
+     * <b>Pre-Condition</b>: one list is populated with every pokemon in the pokedex and the other is empty
      * <br>
-     * <b>Post-Condition</b>: 
+     * <b>Post-Condition</b>: one list is still populated with every pokemon in the pokedex and the other is still empty
      * <br>
      * <b>Expected Results</b>: 
      */
