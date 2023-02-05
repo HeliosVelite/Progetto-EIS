@@ -95,42 +95,48 @@ public class TestListSuite {
 	@Test
 	public void testCollectionConstructor() {
 		HList newList = new ListAdapter(list);
-		assertArrayEquals("The istantiated list doesn't have the same elements of the provided collection.", list.toArray(), newList.toArray());
+		assertArrayEquals("The istantiated list should have the same elements of the provided collection.", list.toArray(), newList.toArray());
 		for(int i = 0; i < list.size(); i++)
-			assertEquals("The istantiated list doesn't have the same elements of the provided collection.", newList.get(i), list.get(i));
+			assertEquals("The istantiated list shoul have the same elements of the provided collection.", newList.get(i), list.get(i));
 		boolean sameSize = list.size() == newList.size();
-		assertTrue("The istantiated list doesn't have the same size of the provided collection.", sameSize);
+		assertTrue("The istantiated list should have the same size of the provided collection.", sameSize);
 		newList = new ListAdapter(emptylist);
-		assertArrayEquals("The istantiated list doesn't have the same elements of the provided collection.", emptylist.toArray(), newList.toArray());
+		assertArrayEquals("The istantiated list should have the same elements of the provided collection.", emptylist.toArray(), newList.toArray());
 		sameSize = emptylist.size() == newList.size();
-		assertTrue("The istantiated list doesn't have the same size of the provided collection.", sameSize && newList.isEmpty());
+		assertTrue("The istantiated list should have the same size of the provided collection.", sameSize && newList.isEmpty());
 	}
 
     /**
-     * <b>Summary</b>: test the contains() method on a populated list
+     * <b>Summary</b>: test the contains(Object o) method
      * <br>
-     * <b>Test Case Design</b>: test the contains() method by using a pokedex list and checking for notable elements.
+     * <b>Test Case Design</b>: test the contains(Object o) method a pokedex list and an empty list checking for notable elements.
      * <br>
-     * <b>Test Description</b>:  test that each pokemon in the pokedex is contained in the list and that pokemon outside of the pokedex are not contained.
-     * Then test null before and after adding it to the list.
+     * <b>Test Description</b>:  test that each pokemon in the pokedex is contained in the list but not in the empty list, 
+     * and test that pokemon outside of the pokedex are not contained in both. Then test null before and after adding it to the list.
      * <br>
-     * <b>Pre-Condition</b>: the list is populated with every pokemon in the pokedex
+     * <b>Pre-Condition</b>: the list is populated with every pokemon in the pokedex, and the empty list is empty
      * <br>
-     * <b>Post-Condition</b>: the list is populated with every pokemon in the pokedex and null
+     * <b>Post-Condition</b>: the list is populated with every pokemon in the pokedex and null, the empty list contains just null
      * <br>
-     * <b>Expected Results</b>: pokemon in the pokedex are contained, pokemon outside of the pokedex are not. Null is contained only after adding it
+     * <b>Expected Results</b>: pokemon in the pokedex are contained in the pokedex list but not in the empty list, pokemon outside of the
+     * pokedex are not contained in both. Null is contained only after adding it
      */
 	@Test
 	public void testContains() {
-		for(String mon: pokedex)
-			assertTrue("The list does not contain all the elements from its initialisation collection.", list.contains(mon));
-		assertFalse(list.contains("Zamazenta"));
-		assertFalse("Null is contained even though it's outside of the intended collection.", list.contains(null));
+		for(String mon: pokedex) {
+			assertTrue("The list should contain all the elements from its initialisation collection.", list.contains(mon));
+			assertFalse("The empty list should noytcontain the elements from any collection.", emptylist.contains(mon));
+		}
+		assertFalse("The list should not contain elements outside its initialisation collection.", list.contains("Zamazenta"));
+		assertFalse("The empty list should not contain any elements.", emptylist.contains("Zamazenta"));
+		assertFalse("Null should not be contained as it's outside of the intended collection.", list.contains(null));
+		assertFalse("The empty list should not contain any elements.", emptylist.contains(null));
 		list.add(null);
-		assertTrue("Null is not contained after adding it.",list.contains(null));
+		emptylist.add(null);
+		assertTrue("Null should be contained after adding it.", list.contains(null) && emptylist.contains(null));
 	}
 	/**
-     * <b>Summary</b>: test the containsAll(HCollection c) method on a populated list
+     * <b>Summary</b>: test the containsAll(HCollection c)
      * <br>
      * <b>Test Case Design</b>: test the containsAll(HCollection c) method on a pokedex list using notable collections as argument
      * <br>
@@ -147,23 +153,23 @@ public class TestListSuite {
      */
 	@Test
 	public void testContainsAll() {
-		HCollection c = new ListAdapter();
-		assertTrue(list.containsAll(c));
-		c = new ListAdapter(list);
-		assertTrue(list.containsAll(c));
+		assertTrue("A list should contain an emptylist.", list.containsAll(emptylist));
+		assertTrue("A list should contain itself.", list.containsAll(list));
+		HCollection c = new ListAdapter(list);
 		c.add("Garganacl");
-		assertFalse(list.containsAll(c));
+		assertFalse("A list should not contain foreign elements.", list.containsAll(c));
 		list.add(null);
 		c.remove("Garganacl");
 		c.add(null);
-		assertTrue(list.containsAll(c));
+		assertTrue("If a collection was contained in a list, then after adding the same element to both, the collection should still be contained in the list.", list.containsAll(c));
 		boolean gtSize = list.size() >= c.size();
-		assertTrue(gtSize);
+		assertTrue("A list should not contain a collection of size greater than itself.", gtSize);
 	}
     /**
-     * <b>Summary</b>: test the equals() method on an empty and a populated list
+     * <b>Summary</b>: test the equals() method
      * <br>
-     * <b>Test Case Design</b>: test the equals() method on an empty and a pokedex list
+     * <b>Test Case Design</b>: test the equals() method on an empty and a pokedex list, two lists are defined to be equal if they contain the
+     * same elements in the same order
      * <br>
      * <b>Test Description</b>: test a list for equality with null, itself and its clone. Then test equality after adding a pokemon and null the the list and its clone
      * <br>
@@ -172,20 +178,57 @@ public class TestListSuite {
      * <b>Post-Condition</b>: the list is populated with every pokemon in the pokedex, plus null and Rayquaza
      * <br>
      * <b>Expected Results</b>: a populated list is not equal to null, but it's equal to itself and its clone. Adding elements makes two lists different unless the
-     * elements are equals
+     * elements are equals and placed in the same order.
      */
 	@Test
 	public void testEquals() {
 		HList list2 = new ListAdapter(list);
-		assertFalse(list.equals(null));
-		assertTrue(list.equals(list));
-		assertTrue(list.equals(list2));
+		assertFalse("An initialised list should not be equal to null.",list.equals(null));
+		assertTrue("A list should be equal to itself.", list.equals(list));
+		assertTrue("A list should be equal to another list with the same elements in the same order.", list.equals(list2));
 		list2.add(null);
 		list2.add("Rayquaza");
 		list.add("Rayquaza");
-		assertFalse(list.equals(list2));
+		assertFalse("A list should not be equal to another list with different elements.", list.equals(list2));
 		list.add(null);
-		assertFalse(list.equals(list2));
+		assertFalse("A list should not be equal to another list with the same elements but in different order.", list.equals(list2));
+	}
+    /**
+     * <b>Summary</b>: get(int index) method test case
+     * <br>
+     * <b>Test Case Design</b>: test the get(int index) method on a pokedex list populated only with every pokemon in the pokedex array (in the same order)
+     * <br>
+     * <b>Test Description</b>: invokes get through a pokedex list to check that each returned element is equal to the pokemon
+     * contained in the pokedex array at the current index, then test for matching size. Then test for indexes out of bounds.
+     * <br>
+     * <b>Pre-Condition</b>: the list is populated only with every pokemon in the pokedex
+     * <br>
+     * <b>Post-Condition</b>: the list is still populated only with every pokemon in the pokedex
+     * <br>
+     * <b>Expected Results</b>: invoking get through the pokedex list returns the same elements in the same order of the list-generating pokedex array, therefore
+     * they have the same size. Also calling get with indexes out of bounds throws IndexOutOfBoundsException.
+     */
+	@Test
+	public void testGet() {
+		for(int i = 0; i < pokedex.length; i++)
+			assertEquals("An unmodified list should contain the same elements in the same position as its initialisation collection.", pokedex[i], list.get(i));
+		assertEquals("An unmodified list should have the same size as its initialisation collection.", pokedex[pokedex.length - 1], list.get(list.size() - 1));
+		boolean exceptionThrown = false;
+		try {
+			list.get(-1);
+		}
+		catch(IndexOutOfBoundsException e) {
+			exceptionThrown = true;
+		}
+		assertTrue("IndexOutOfBoundsException should be thrown when invoking get with a negative index.",exceptionThrown);
+		exceptionThrown = false;
+		try {
+			list.get(list.size());
+		}
+		catch(IndexOutOfBoundsException e) {
+			exceptionThrown = true;
+		}
+		assertTrue("IndexOutOfBoundsException should be thrown when invoking get with an index greater or equal to the list size.",exceptionThrown);
 	}
     /**
      * <b>Summary</b>:
