@@ -590,6 +590,239 @@ public class TestListSuite {
 		}
 	}
     /**
+     * <b>Summary</b>: test case for the clear() method
+     * <br>
+     * <b>Test Case Design</b>: test the clear() method on a pokedex list
+     * <br>
+     * <b>Test Description</b>: test emptiness of the pokedex list after calling clear() on the list
+     * <br>
+     * <b>Pre-Condition</b>: the list is populated with every pokemon in the pokedex
+     * <br>
+     * <b>Post-Condition</b>: the list is now empty
+     * <br>
+     * <b>Expected Results</b>: the list is empty after the call to clear()
+     */
+	@Test
+	public void testClear() {
+		list.clear();
+		assertTrue("A cleared list should be empty.", list.isEmpty());
+	}
+    /**
+     * <b>Summary</b>: test case for the remove(int index) method
+     * <br>
+     * <b>Test Case Design</b>: test the remove(int index) method on a pokedex list
+     * <br>
+     * <b>Test Description</b>: test indexes out of bounds, then test removal of an element at a valid index. Then tests removal of every element in the list.
+     * <br>
+     * <b>Pre-Condition</b>: the list is populated with every pokemon in the pokedex
+     * <br>
+     * <b>Post-Condition</b>: the list is now empty
+     * <br>
+     * <b>Expected Results</b>: calling the method with an index out of bounds throws IndexOutOfBoundsException, while calling it with a valid index removes
+     * the element at that index, shifting on the left every element at its right and returning the removed element. Removal of every element makes the list empty.
+     */
+	@Test
+	public void testRemoveIndex() {
+		boolean exceptionThrown = false;
+		try {
+			list.remove(-1);
+		}
+		catch(IndexOutOfBoundsException e) {
+			exceptionThrown = true;
+		}
+		assertTrue("Using a negative index should throw IndexOutOfBoundsException.", exceptionThrown);
+		exceptionThrown = false;
+		try {
+			list.remove(list.size());
+		}
+		catch(IndexOutOfBoundsException e) {
+			exceptionThrown = true;
+		}
+		assertTrue("Using an index greater than the list's size should throw IndexOutOfBoundsException.", exceptionThrown);
+		Object mon = list.get(3);
+		assertEquals("The removed element should be the element at the provided index.", mon, list.remove(3));
+		for(int i = 3; i < list.size(); i++)
+			assertEquals("After calling remove(int index) the elements after the provided index should have been shifted by 1 to the left.", pokedex[i + 1], list.get(i));
+		int size = list.size();
+		while(size > 0) {
+			mon = list.get(0);
+			assertEquals("The removed element should be the element at the provided index.", mon, list.remove(0));
+			size--;
+		}
+		assertTrue("After removing every element the list should be empty.", list.isEmpty());
+	}
+    /**
+     * <b>Summary</b>: test case for the remove(Object o) method
+     * <br>
+     * <b>Test Case Design</b>: test the remove(Object o) method on a pokedex list
+     * <br>
+     * <b>Test Description</b>: test removal of the first occurrence in this list of the specified element and shifting of any subsequent elements to the left;
+     * test immutability in removal of not contained items; test removal of duplicate elements. test removal of every element contained in the list
+     * <br>
+     * <b>Pre-Condition</b>: the list is populated with every pokemon in the pokedex
+     * <br>
+     * <b>Post-Condition</b>: the list is now empty
+     * <br>
+     * <b>Expected Results</b>: removal of a not contained element returns false and doesn't change the list, while removal of a contained element returns
+     * true and shifts any subsequent element to the left. Removal of a duplicated element removes only the first occurrence. Removal of every element contained
+     * in the list makes it empty.
+     */
+	@Test
+	public void testRemoveObject() {
+		boolean contained = list.contains(null);
+		assertFalse("Remove(Object o) should return false if the obejct is not contained in the list and therefore the list is not changed.", list.remove(null) || contained);
+		assertArrayEquals("Remove(Object o) should not change the list if the object is not contained.", pokedex, list.toArray());
+		
+		contained = list.contains("Arcanine");
+		assertFalse("Remove(Object o) should return false if the obejct is not contained in the list and therefore the list is not changed.", list.remove("Arcanine") || contained);
+		assertArrayEquals("Remove(Object o) should not change the list if the object is not contained.", pokedex, list.toArray());
+		
+		int k = list.indexOf("Charizard");
+		contained = list.contains("Charizard");
+		assertTrue("Remove(Object o) should return true if the object is contained in the list.", list.remove("Charizard") && contained);
+		for(int i = 0; i < k; i++)
+			assertEquals("Remove(Object o) should not shift or change elements before the removed object.", pokedex[i], list.get(i));
+		for(int i = k; i < list.size(); i++)
+			assertEquals("Remove(Object o) should shift to the left elements after thee removed object.", pokedex[i + 1], list.get(i));
+		
+		int i = list.indexOf("Venusaur");
+		list.add("Venusaur");
+		contained = list.contains("Venusaur");
+		boolean duplicated = list.indexOf("Venusaur") != list.lastIndexOf("Venusaur");
+		assertTrue("Remove(Object o) should return true for a duplicated object.", list.remove("Venusaur") && contained && duplicated);
+		duplicated = list.indexOf("Venusaur") != list.lastIndexOf("Venusaur");
+		assertFalse("Remove(Object o) should remove one istance of a duplicated object.", duplicated);
+		assertNotEquals("Remove(Object o) should remove the first occurrence of the object.", "Venusaur", list.get(i));
+		
+		int size = list.size();
+		while(size > 0) {
+			assertTrue("Remove(Object o) should return true when object is the first element of a not-empty list.", list.remove(list.get(0)));
+			size--;
+		}
+		assertTrue("After removing every element the list should be empty.", list.isEmpty());
+	}
+    /**
+     * <b>Summary</b>: test case for the removeAll(HCollection c) method
+     * <br>
+     * <b>Test Case Design</b>: test the removeAll(HCollection c) method using a pokedex list and an empty list
+     * <br>
+     * <b>Test Description</b>: test removal of an empty list from the pokedex list, then test removal of a clone of the pokedex list. Then test the method
+     * after adding a shared and a not shared element to the lists. Test the method with null as collection.
+     * <br>
+     * <b>Pre-Condition</b>: one list is populated with every pokemon in the pokedex and the other is empty
+     * <br>
+     * <b>Post-Condition</b>: one list is populated with two pokemon, while the other with just one. They share one element.
+     * <br>
+     * <b>Expected Results</b>: calling the method with null as a collection throws NullPointerException. Removal of an empty collection doesn't change the list
+     * and therefore returns false, while removal of the list itself returns true as every element is removed and the list is now empty. The method returns true
+     * if the list shares at least one element with the collection and the common element are removed.
+     */
+	@Test
+	public void testRemoveAll() {
+		boolean exceptionThrown = false;
+		try {
+			list.removeAll(null);
+		}
+		catch(NullPointerException e) {
+			exceptionThrown = true;
+		}
+		assertTrue("Using null as the collection to add should throw NullPointerException..", exceptionThrown);
+		
+		assertFalse("Calling removeAll(HCollection c) when c is empty should not remove any element from the list.", list.removeAll(emptylist));
+		assertArrayEquals("Calling removeAll(HCollection c) when c is empty should have not changed the list.", pokedex, list.toArray());
+		
+		assertTrue("Calling removeAll(HCollection c) when c is the list itself should have removed all element from the list.", list.removeAll(new ListAdapter(list)));
+		assertTrue("Calling removeAll(HCollection c) when c is the list itself should have made the list empty.", list.isEmpty());
+		
+		list.add("Chespin");
+		list.add("Frokie");
+		emptylist.add("Frokie");
+		assertTrue("Calling removeAll(HCollection c) when c and the list share at least one item should remove the shared elements.", list.removeAll(emptylist));
+		String[] a = {"Chespin"};
+		assertArrayEquals("The shared elements should have been removed..", a, list.toArray());
+	}
+    /**
+     * <b>Summary</b>: test case for the retainAll(HCollection c) method
+     * <br>
+     * <b>Test Case Design</b>: test the retainAll(HCollection c) method on a pokedex list
+     * <br>
+     * <b>Test Description</b>: test removal of all the elements not in the provided collection, then test immutability when called with a
+     * collection of every item in the list. Then test the method after adding a shared and a not shared element to the lists. Test when null is provided as the collection.
+     * <br>
+     * <b>Pre-Condition</b>: the list is populated with every pokemon in the pokedex
+     * <br>
+     * <b>Post-Condition</b>: the list is populated with one pokemon not in the pokedex
+     * <br>
+     * <b>Expected Results</b>: Using null as the collection to add throws NullPointerException; the method called with a clone of the list as collection
+     * returns false and therefore the list is unchanged, while using an empty list as collection returns true and every element in the list has been removed.
+     * Calling the method using a collection with only one element shared with the list, returns true and keeps just that element in the list.
+     */
+	@Test
+	public void testRetainAll() {
+		boolean exceptionThrown = false;
+		try {
+			list.removeAll(null);
+		}
+		catch(NullPointerException e) {
+			exceptionThrown = true;
+		}
+		assertTrue("Using null as the collection to add should throw NullPointerException..", exceptionThrown);
+		
+		assertFalse("Calling retainAll(HCollection c) when c is a clone of the list should return false as the list should be unchanged.", list.retainAll(new ListAdapter(list)));
+		assertArrayEquals("Calling retainAll(HCollection c) when c is a clone of the list should not change the list", pokedex, list.toArray());
+		
+		assertTrue("Calling retainAll(HCollection c) when c is an empty list should return true as every element in the list should have been removed.", list.retainAll(emptylist));
+		assertArrayEquals("Calling retainAll(HCollection c) when c is an empty list should have removed every element from the list..", emptylist.toArray(), list.toArray());
+		
+		list.add("Chespin");
+		list.add("Frokie");
+		emptylist.add("Frokie");
+		assertTrue("Calling the method using a collection with only one element shared with the list, should return true and keep just that element in the list.", list.retainAll(emptylist));
+		String[] a = {"Frokie"};
+		assertArrayEquals("Calling the method using a collection with only one element shared with the list, should keep just that element in the list.", a, list.toArray());
+	}
+
+    /**
+     * <b>Summary</b>: test case for the method set(int index, Object o)
+     * <br>
+     * <b>Test Case Design</b>: test the method set(int index, Object o) on a pokedex list
+     * <br>
+     * <b>Test Description</b>: test the method when called with an index out of bounds. Then test the method on the pokedex list with a valid index, setting
+     * the pokemon in that position to a different one outside the pokedex.
+     * <br>
+     * <b>Pre-Condition</b>: the list is populated with every pokemon in the pokedex
+     * <br>
+     * <b>Post-Condition</b>: the list is still populated by the same number of pokemon, but now one of them are outside of the pokedex
+     * <br>
+     * <b>Expected Results</b>: calling the method with an index out of bounds throws IndexOutOfBoundsException. Calling the method with a valid index and
+     * providing a pokemon outside the pokedex changes the element at the index with the provided pokemon and returns the pokemon previously in that position
+     */
+	@Test
+	public void testSet() {
+		boolean exceptionThrown = false;
+		try {
+			list.set(-1, null);
+		}
+		catch(IndexOutOfBoundsException e) {
+			exceptionThrown = true;
+		}
+		assertTrue("Using an index greater than the list's size should throw IndexOutOfBoundsException.", exceptionThrown);
+		exceptionThrown = false;
+		try {
+			list.set(list.size(), null);
+		}
+		catch(IndexOutOfBoundsException e) {
+			exceptionThrown = true;
+		}
+		assertTrue("Using an index greater than the list's size should throw IndexOutOfBoundsException.", exceptionThrown);
+		
+		Object o1 = list.get(4);
+		Object o2 = list.set(4, "Sandile");
+		assertEquals("Calling get(int index, Object o) should have returned the element previously at the provided index.", o1, o2);
+		assertNotEquals("Calling get(int index, Object o) should have changed the element at the provided index.", o1, list.get(4));
+		assertEquals("Calling get(int index, Object o) should have set the element at the provided index as the provided object.", list.get(4), "Sandile");
+	}
+    /**
      * <b>Summary</b>:
      * <br>
      * <b>Test Case Design</b>: 
