@@ -31,7 +31,7 @@ public class Vector {
 	    }
 	    /**
 	     * Constructs an empty vector with the specified initial capacity.
-	     * @param initialCapacity
+	     * @param initialCapacity initial capacity of the vector.
 	     * 
 	     * @throws IllegalArgumentException if the specified initial capacity is negative
 	     */
@@ -114,7 +114,7 @@ public class Vector {
 	     * Searches for the first occurrence of the given argument, testing for equality using the equals method.
 	     * @param elem an object
 	     * @return the index of the first occurrence of the argument in this vector; returns -1 if the object is not found.
-	     * @see Object.equals(java.lang.Object
+	     * @see Object.equals(java.lang.Object)
 	     */
 	    public int indexOf(Object elem){
 	        return vector.indexOf(elem);

@@ -14,7 +14,98 @@ import myAdapter.HListIterator;
 import myAdapter.ListAdapter;
 
 /**
+ * <b>Summary</b>: The test suite TestListSuite collects test cases on methods of the ListAdapter class.
+ * This collection of test cases covers every method of the ListAdapter class and test their intended behaviour and edge-cases.
  * 
+ * The {@link ListAdapter.ListIterator} test cases are collected in a dedicated test suite. 
+ * <br>
+ * <b>Test Suite Design</b>: The test suite contains test cases designed to test the intended behaviour of the ListAdapter class' methods and their
+ * edge-cases. In order to do so the test suite uses two instances of ListAdapter: an empty list and a generic list populated by a immutable collection of pokemon
+ * (referred to as pokedex).
+ * <br>
+ * <b>Pre-Condition</b>:
+ * <br>
+ * <b>Post-Condition</b>:
+ * <br>
+ * <b>Test Cases</b>:
+ * <li>
+ * 		{@link testContains}
+ * </li>
+ * <li>
+ * 		{@link testContainsAll}
+ * </li>
+ * <li>
+ * 		{@link testEquals}
+ * </li>
+ * <li>
+ * 		{@link testGet}
+ * </li>
+ * <li>
+ * 		{@link testIndexOf}
+ * </li>
+ * <li>
+ * 		{@link testIsEmpty}
+ * </li>
+ * <li>
+ * 		{@link testLastIndexOf}
+ * </li>
+ * <li>
+ * 		{@link testSize}
+ * </li>
+ * <li>
+ * 		{@link testToArray}
+ * </li>
+ * <li>
+ * 		{@link testToArrayWithTarget}
+ * </li>
+ * <li>
+ * 		{@link testHashCode}
+ * </li>
+ * <li>
+ * 		{@link testAdd}
+ * </li>
+ * <li>
+ * 		{@link testAddAtIndex}
+ * </li>
+ * <li>
+ * 		{@link testAddAll}
+ * </li>
+ * <li>
+ * 		{@link testAddAllAtIndex}
+ * </li>
+ * <li>
+ * 		{@link testClear}
+ * </li>
+ * <li>
+ * 		{@link testRemoveIndex}
+ * </li>
+ * <li>
+ * 		{@link testRemoveObject}
+ * </li>
+ * <li>
+ * 		{@link testRemoveAll}
+ * </li>
+ * <li>
+ * 		{@link testRetainAll}
+ * </li>
+ * <li>
+ * 		{@link testSet}
+ * </li>
+ * <li>
+ * 		{@link testSublist}
+ * </li>
+ * <br>
+ * <b>Test suite execution records</b>:
+ * <br>
+ * <b>Execution Variables</b>: <ul>
+ * <li>{@code String[] pokedex = {"Bulbasaur", "Ivysaur", "Venusaur", "Charmander", "Charmeleon",
+			"Charizard", "Squirtle", "Wartortle", "Blastoise"};}: An immutable array of pokemon from which the list istance of ListAdapter is populated.</li>
+ * <li>{@code HList list}: an instance of ListAdapter populated by every pokemon in the pokedex.</li>
+ * <li>{@code HList emptylist}: an empty instance of ListAdapter.</li>
+ * </ul>
+ * 
+ * @see ListAdapter
+ * @author Zuech Riccardo
  */
 public class TestListSuite {
 
@@ -50,18 +141,18 @@ public class TestListSuite {
         System.out.println("TestListSuite ended. Time elapsed " + (System.currentTimeMillis() - timeStart)  + "ms.");
     }
     /**
-     * <b>Summary</b>: test case fot the initialisation of an empty list through the default constructor
+     * <b>Summary</b>: test case for the initialisation of an empty list through the default constructor
      * <br>
      * <b>Test Case Design</b>: test the emptiness of a list created from the default constructor
      * <br>
-     * <b>Test Description</b>: a list is instantiated through the default constructor and it's asserted to be empty through the use of isEmpty(), checking
+     * <p><b>Test Description</b>: a list is instantiated through the default constructor and it's asserted to be empty through the use of isEmpty(), checking
      * that its size is 0 and that calling get(0) throws IndexOutOfBounds exception
      * <br>
      * <b>Pre-Condition</b>:  none
      * <br>
      * <b>Post-Condition</b>:  the instantiated list is empty
      * <br>
-     * <b>Expected Results</b>:  isEmpty() returns true, the list size is 0 and get(0) throws IndexOutOfBoundsException
+     * </p><b>Expected Results</b>:  isEmpty() returns true, the list size is 0 and get(0) throws IndexOutOfBoundsException
      */
 	@Test
 	public void testDefaultConstructor() {
@@ -83,7 +174,7 @@ public class TestListSuite {
      * <br>
      * <b>Test Case Design</b>: test that a list instantiated by passing a collection to its constructor contains each element of the provided collection
      * <br>
-     * <b>Test Description</b>: a list is instantiated by passing a pokedex list as its constructor's argument, then it's checked element by element to see
+     * <p><b>Test Description</b>: a list is instantiated by passing a pokedex list as its constructor's argument, then it's checked element by element to see
      * if each pokemon in the pokedex list is contained. Also it's checked to be equal by size and through the toArray() method. Then another list is
      * Instantiated by passing an empty list as argument of its constructor and the same tests are repeated on it, plus a check on its emptiness.
      * <br>
@@ -91,7 +182,7 @@ public class TestListSuite {
      * <br>
      * <b>Post-Condition</b>:  the instantiated list is equal to the pokedex list and then to the empty list
      * <br>
-     * <b>Expected Results</b>:  the list is equals element per element to the pokedex list, they have the same size and toArray() returns the same array.
+     * </p><b>Expected Results</b>:  the list is equals element per element to the pokedex list, they have the same size and toArray() returns the same array.
      * Same for the list instantiated by passing an empty list, plus it's empty.
      */
 	@Test
@@ -113,14 +204,14 @@ public class TestListSuite {
      * <br>
      * <b>Test Case Design</b>: test the contains(Object o) method a pokedex list and an empty list checking for notable elements.
      * <br>
-     * <b>Test Description</b>:  test that each pokemon in the pokedex is contained in the list but not in the empty list, 
+     * <p><b>Test Description</b>:  test that each pokemon in the pokedex is contained in the list but not in the empty list, 
      * and test that pokemon outside of the pokedex are not contained in both. Then test null before and after adding it to the list.
      * <br>
      * <b>Pre-Condition</b>: the list is populated with every pokemon in the pokedex, and the empty list is empty
      * <br>
      * <b>Post-Condition</b>: the list is populated with every pokemon in the pokedex and null, the empty list contains just null
      * <br>
-     * <b>Expected Results</b>: pokemon in the pokedex are contained in the pokedex list but not in the empty list, pokemon outside of the
+     * </p><b>Expected Results</b>: pokemon in the pokedex are contained in the pokedex list but not in the empty list, pokemon outside of the
      * pokedex are not contained in both. Null is contained only after adding it
      */
 	@Test
@@ -142,7 +233,7 @@ public class TestListSuite {
      * <br>
      * <b>Test Case Design</b>: test the containsAll(HCollection c) method on a pokedex list using notable collections as argument
      * <br>
-     * <b>Test Description</b>: test the containsAll(HCollection c) method on a pokedex list using as argument an empty list and an equal list. Then test the 
+     * <p><b>Test Description</b>: test the containsAll(HCollection c) method on a pokedex list using as argument an empty list and an equal list. Then test the 
      * method adding and removing a pokemon  from the argument collection and adding null to both the list and the collection.
      * Then test that the list size is greater or equal to the collection size.
      * <br>
@@ -150,7 +241,7 @@ public class TestListSuite {
      * <br>
      * <b>Post-Condition</b>: the list is populated with every pokemon in the pokedex
      * <br>
-     * <b>Expected Results</b>: an empty list is always contained in any list, a list is always contained in itself. Adding the same element to both the collection
+     * </p><b>Expected Results</b>: an empty list is always contained in any list, a list is always contained in itself. Adding the same element to both the collection
      * and the list still returns true, while adding a new element not contained in the list to the collection returns false.
      */
 	@Test
@@ -173,13 +264,13 @@ public class TestListSuite {
      * <b>Test Case Design</b>: test the equals() method on an empty and a pokedex list, two lists are defined to be equal if they contain the
      * same elements in the same order
      * <br>
-     * <b>Test Description</b>: test a list for equality with null, itself and its clone. Then test equality after adding a pokemon and null the the list and its clone
+     * <p><b>Test Description</b>: test a list for equality with null, itself and its clone. Then test equality after adding a pokemon and null the the list and its clone
      * <br>
      * <b>Pre-Condition</b>: the list is populated with every pokemon in the pokedex
      * <br>
      * <b>Post-Condition</b>: the list is populated with every pokemon in the pokedex, plus null and Rayquaza
      * <br>
-     * <b>Expected Results</b>: a populated list is not equal to null, but it's equal to itself and its clone. Adding elements makes two lists different unless the
+     * </p><b>Expected Results</b>: a populated list is not equal to null, but it's equal to itself and its clone. Adding elements makes two lists different unless the
      * elements are equals and placed in the same order.
      */
 	@Test
@@ -200,14 +291,14 @@ public class TestListSuite {
      * <br>
      * <b>Test Case Design</b>: test the get(int index) method on a pokedex list populated only with every pokemon in the pokedex array (in the same order)
      * <br>
-     * <b>Test Description</b>: invokes get through a pokedex list to check that each returned element is equal to the pokemon
+     * <p><b>Test Description</b>: invokes get through a pokedex list to check that each returned element is equal to the pokemon
      * contained in the pokedex array at the current index, then test for matching size. Then test for indexes out of bounds.
      * <br>
      * <b>Pre-Condition</b>: the list is populated only with every pokemon in the pokedex
      * <br>
      * <b>Post-Condition</b>: the list is still populated only with every pokemon in the pokedex
      * <br>
-     * <b>Expected Results</b>: invoking get through the pokedex list returns the same elements in the same order of the list-generating pokedex array, therefore
+     * </p><b>Expected Results</b>: invoking get through the pokedex list returns the same elements in the same order of the list-generating pokedex array, therefore
      * they have the same size. Also calling get with indexes out of bounds throws IndexOutOfBoundsException.
      */
 	@Test
@@ -237,14 +328,14 @@ public class TestListSuite {
      * <br>
      * <b>Test Case Design</b>: test the indexOf(Object o) method on non-repetitive pokedex list and on a repetitive pokedex list.
      * <br>
-     * <b>Test Description</b>: test the returned index for each pokemon in a non-repetitive pokedex list and test the first occurrence by adding an
+     * <p><b>Test Description</b>: test the returned index for each pokemon in a non-repetitive pokedex list and test the first occurrence by adding an
      * already contained pokemon to the pokedex list. Also test the method on not contained pokemon.
      * <br>
      * <b>Pre-Condition</b>: the list is populated with every pokemon in the pokedex
      * <br>
      * <b>Post-Condition</b>: the list is still populated with every pokemon in the pokedex, but with an extra Charmander at the end.
      * <br>
-     * <b>Expected Results</b>: each element's first occurrence in the list should be the index occupied by the element in the pokedex array. Not contained
+     * </p><b>Expected Results</b>: each element's first occurrence in the list should be the index occupied by the element in the pokedex array. Not contained
      * elements return -1 and adding an already contained pokemon doesn't change the value returned by the method, in other words only the index of the first
      * occurrence is returned.
      */
@@ -265,13 +356,13 @@ public class TestListSuite {
      * <br>
      * <b>Test Case Design</b>: test the isEmpty() method on an empty list and a pokedex list
      * <br>
-     * <b>Test Description</b>: test emptiness of an empty list (emptiness corresponds to zero size) and a pokedex list
+     * <p><b>Test Description</b>: test emptiness of an empty list (emptiness corresponds to zero size) and a pokedex list
      * <br>
      * <b>Pre-Condition</b>: emptylist is empty and the pokedex list is populated with every pokemon in the pokedex.
      * <br>
      * <b>Post-Condition</b>: emptylist is still empty and the pokedex list is still populated with every pokemon in the pokedex.
      * <br>
-     * <b>Expected Results</b>: the "empty list" is empty and zero sized, while the pokedex list is not
+     * </p><b>Expected Results</b>: the "empty list" is empty and zero sized, while the pokedex list is not
      */
 	@Test
 	public void testIsEmpty() {
@@ -285,14 +376,14 @@ public class TestListSuite {
      * <br>
      * <b>Test Case Design</b>: test the lastIndexOf(Object o) method on non-repetitive pokedex list and on a repetitive pokedex list.
      * <br>
-     * <b>Test Description</b>: test the returned index for each pokemon in a non-repetitive pokedex list and test the last occurrence by adding an
+     * <p><b>Test Description</b>: test the returned index for each pokemon in a non-repetitive pokedex list and test the last occurrence by adding an
      * already contained pokemon to the pokedex list. Also test the method on not contained pokemon.
      * <br>
      * <b>Pre-Condition</b>: the list is populated with every pokemon in the pokedex
      * <br>
      * <b>Post-Condition</b>: the list is still populated with every pokemon in the pokedex, but with an extra Charmander at the end.
      * <br>
-     * <b>Expected Results</b>: each element's last occurrence in the non-modified list should be the index occupied by the element in the pokedex array.
+     * </p><b>Expected Results</b>: each element's last occurrence in the non-modified list should be the index occupied by the element in the pokedex array.
      * Not contained elements return -1 and adding an already contained element changes the value returned by the method, in other words only the index of 
      * the last occurrence is returned.
      */
@@ -314,13 +405,13 @@ public class TestListSuite {
      * <br>
      * <b>Test Case Design</b>: test the size() method on a pokedex list and an empty list.
      * <br>
-     * <b>Test Description</b>: test the size of the pokedex list, then the size of the empty list
+     * <p><b>Test Description</b>: test the size of the pokedex list, then the size of the empty list
      * <br>
      * <b>Pre-Condition</b>: one list is populated with every pokemon in the pokedex and the other is empty
      * <br>
      * <b>Post-Condition</b>: one list is still populated with every pokemon in the pokedex and the other is still empty
      * <br>
-     * <b>Expected Results</b>: the pokedex list's size is the same as the pokedex array; the empty list size is zero
+     * </p><b>Expected Results</b>: the pokedex list's size is the same as the pokedex array; the empty list size is zero
      */
 	@Test
 	public void testSize() {
@@ -334,14 +425,14 @@ public class TestListSuite {
      * <br>
      * <b>Test Case Design</b>: test the toArray() method on a pokedex list and an empty list
      * <br>
-     * <b>Test Description</b>: test correspondence between returned array items and list items for the populated pokedex list
+     * <p><b>Test Description</b>: test correspondence between returned array items and list items for the populated pokedex list
 	 * list and the empty list
      * <br>
     * <b>Pre-Condition</b>: one list is populated with every pokemon in the pokedex and the other is empty
      * <br>
      * <b>Post-Condition</b>: one list is still populated with every pokemon in the pokedex and the other is still empty
      * <br>
-     * <b>Expected Results</b>: the pokedex list returns a copy of the pokedex array, while the empty list returns an empty array
+     * </p><b>Expected Results</b>: the pokedex list returns a copy of the pokedex array, while the empty list returns an empty array
      */
 	@Test
 	public void testToArray() {
@@ -354,14 +445,14 @@ public class TestListSuite {
      * <br>
      * <b>Test Case Design</b>: test the toArray(Object[] arrayTarget) method on a pokedex list
      * <br>
-     * <b>Test Description</b>: test the presence of each element of the pokedex list in arrayTarget.
+     * <p><b>Test Description</b>: test the presence of each element of the pokedex list in arrayTarget.
      * Notable test edge-cases are using null, an array smaller than the pokedex list's size, and an array bigger as arrayTarget.
      * <br>
     * <b>Pre-Condition</b>: one list is populated with every pokemon in the pokedex
      * <br>
      * <b>Post-Condition</b>: one list is still populated with every pokemon in the pokedex
      * <br>
-     * <b>Expected Results</b>: each element contained in the list is present in the returned arrayTarget. Using null as arrayTarget 
+     * </p><b>Expected Results</b>: each element contained in the list is present in the returned arrayTarget. Using null as arrayTarget 
      * throws NullPointerException. Using a smaller array returns a new array and using a bigger array fills it with null after the last element of the list.
      */
 	@Test
@@ -400,14 +491,14 @@ public class TestListSuite {
      * <br>
      * <b>Test Case Design</b>: test the hashCode() method on a pokedex list and an empty list
      * <br>
-     * <b>Test Description</b>: test the hassCode() method on the pokedex list and an empty list by comparing its return value with the hashCode algorithm 
+     * <p><b>Test Description</b>: test the hassCode() method on the pokedex list and an empty list by comparing its return value with the hashCode algorithm 
      * value for lists.
      * <br>
      * <b>Pre-Condition</b>: one list is populated with every pokemon in the pokedex and the other is empty
      * <br>
      * <b>Post-Condition</b>: one list is still populated with every pokemon in the pokedex and the other is still empty
      * <br>
-     * <b>Expected Results</b>: the algorithm-generated and method-returned values are the same for both the pokedex list and the empty list
+     * </p><b>Expected Results</b>: the algorithm-generated and method-returned values are the same for both the pokedex list and the empty list
      */
 	@Test
 	public void testHashCode() {
@@ -433,14 +524,14 @@ public class TestListSuite {
      * <br>
      * <b>Test Case Design</b>: test the add(Object o) method using a pokedex list
      * <br>
-     * <b>Test Description</b>:  test the addition of a new pokemon at the end of the pokedex list, checking in particular the difference in size of the list
+     * <p><b>Test Description</b>:  test the addition of a new pokemon at the end of the pokedex list, checking in particular the difference in size of the list
      * and the position of the added element
      * <br>
      * <b>Pre-Condition</b>: the list is populated with every pokemon in the pokedex
      * <br>
      * <b>Post-Condition</b>: the list is still populated with every pokemon in the pokedex plus the one added
      * <br>
-     * <b>Expected Results</b>: the new pokemon is added at the end of the list, making it grow by 1 in size
+     * </p><b>Expected Results</b>: the new pokemon is added at the end of the list, making it grow by 1 in size
      */
 	@Test
 	public void testAdd() {
@@ -456,14 +547,14 @@ public class TestListSuite {
      * <br>
      * <b>Test Case Design</b>: test the add(int index, Object o) method using a pokedex list
      * <br>
-     * <b>Test Description</b>:  test the addition of a new pokemon at the specified index of the pokedex list, making the list grow
+     * <p><b>Test Description</b>:  test the addition of a new pokemon at the specified index of the pokedex list, making the list grow
 	 * in size and shifting already contained items to the right. Test indexes out of bounds.
      * <br>
      * <b>Pre-Condition</b>: the list is populated with every pokemon in the pokedex
      * <br>
      * <b>Post-Condition</b>: the list is still populated with every pokemon in the pokedex plus Arcanine
      * <br>
-     * <b>Expected Results</b>: the new pokemon is added at the provided index, making it grow by 1 in size and shifting the other items to the right. Calling
+     * </p><b>Expected Results</b>: the new pokemon is added at the provided index, making it grow by 1 in size and shifting the other items to the right. Calling
      * the method with an index out of bounds throws IndexOutOfBoundsException
      */
 	@Test
@@ -499,7 +590,7 @@ public class TestListSuite {
      * <br>
      * <b>Test Case Design</b>: test the addAll(HCollection c) method using a pokedex list and an empty list
      * <br>
-     * <b>Test Description</b>:  test the addition of a second pokedex collection at the end of the pokedex list and the empty list, making the lists grow
+     * <p><b>Test Description</b>:  test the addition of a second pokedex collection at the end of the pokedex list and the empty list, making the lists grow
 	 * in size by the size of the pokedex collection. Test the addition of null as c.
      * <br>
      * <b>Pre-Condition</b>: the list is populated with every pokemon in the pokedex and the other list is empty
@@ -507,7 +598,7 @@ public class TestListSuite {
      * <b>Post-Condition</b>: the list is populated with every pokemon in the pokedex, but a second pokedex is appended at the end; the empty list is now
      * populated with every pokemon in the pokedex
      * <br>
-     * <b>Expected Results</b>: the new pokedex is added at the end of the lists, making them grow by the pokedex collection in size. Calling
+     * </p><b>Expected Results</b>: the new pokedex is added at the end of the lists, making them grow by the pokedex collection in size. Calling
      * the method with null as the collection throws NullPointerException.
      */
 	@Test
@@ -544,7 +635,7 @@ public class TestListSuite {
      * <br>
      * <b>Test Case Design</b>: test the add(int index, HCollection c) method using a pokedex list and an empty list
      * <br>
-     * <b>Test Description</b>:  test the addition of a new collection of pokemon at the specified index of the pokedex list and the empty list, making them grow
+     * <p><b>Test Description</b>:  test the addition of a new collection of pokemon at the specified index of the pokedex list and the empty list, making them grow
 	 * in size and shifting already contained items to the right. Test indexes out of bounds.
      * <br>
      * <b>Pre-Condition</b>: one list is populated with every pokemon in the pokedex 
@@ -552,7 +643,7 @@ public class TestListSuite {
      * <b>Post-Condition</b>: the list is populated with every pokemon in the pokedex, but a second pokedex is appended at the specified index;
      * the empty list is now populated with every pokemon in the pokedex
      * <br>
-     * <b>Expected Results</b>: the new pokedex collection is added at the provided indexes, making the lists grow by the collection's size 
+     * </p><b>Expected Results</b>: the new pokedex collection is added at the provided indexes, making the lists grow by the collection's size 
      * and shifting the other items to the right. Calling the method with an index out of bounds throws IndexOutOfBoundsException
      */
 	@Test
@@ -594,13 +685,13 @@ public class TestListSuite {
      * <br>
      * <b>Test Case Design</b>: test the clear() method on a pokedex list
      * <br>
-     * <b>Test Description</b>: test emptiness of the pokedex list after calling clear() on the list
+     * <p><b>Test Description</b>: test emptiness of the pokedex list after calling clear() on the list
      * <br>
      * <b>Pre-Condition</b>: the list is populated with every pokemon in the pokedex
      * <br>
      * <b>Post-Condition</b>: the list is now empty
      * <br>
-     * <b>Expected Results</b>: the list is empty after the call to clear()
+     * </p><b>Expected Results</b>: the list is empty after the call to clear()
      */
 	@Test
 	public void testClear() {
@@ -612,13 +703,13 @@ public class TestListSuite {
      * <br>
      * <b>Test Case Design</b>: test the remove(int index) method on a pokedex list
      * <br>
-     * <b>Test Description</b>: test indexes out of bounds, then test removal of an element at a valid index. Then tests removal of every element in the list.
+     * <p><b>Test Description</b>: test indexes out of bounds, then test removal of an element at a valid index. Then tests removal of every element in the list.
      * <br>
      * <b>Pre-Condition</b>: the list is populated with every pokemon in the pokedex
      * <br>
      * <b>Post-Condition</b>: the list is now empty
      * <br>
-     * <b>Expected Results</b>: calling the method with an index out of bounds throws IndexOutOfBoundsException, while calling it with a valid index removes
+     * </p><b>Expected Results</b>: calling the method with an index out of bounds throws IndexOutOfBoundsException, while calling it with a valid index removes
      * the element at that index, shifting on the left every element at its right and returning the removed element. Removal of every element makes the list empty.
      */
 	@Test
@@ -656,14 +747,14 @@ public class TestListSuite {
      * <br>
      * <b>Test Case Design</b>: test the remove(Object o) method on a pokedex list
      * <br>
-     * <b>Test Description</b>: test removal of the first occurrence in this list of the specified element and shifting of any subsequent elements to the left;
+     * <p><b>Test Description</b>: test removal of the first occurrence in this list of the specified element and shifting of any subsequent elements to the left;
      * test immutability in removal of not contained items; test removal of duplicate elements. test removal of every element contained in the list
      * <br>
      * <b>Pre-Condition</b>: the list is populated with every pokemon in the pokedex
      * <br>
      * <b>Post-Condition</b>: the list is now empty
      * <br>
-     * <b>Expected Results</b>: removal of a not contained element returns false and doesn't change the list, while removal of a contained element returns
+     * </p><b>Expected Results</b>: removal of a not contained element returns false and doesn't change the list, while removal of a contained element returns
      * true and shifts any subsequent element to the left. Removal of a duplicated element removes only the first occurrence. Removal of every element contained
      * in the list makes it empty.
      */
@@ -706,14 +797,14 @@ public class TestListSuite {
      * <br>
      * <b>Test Case Design</b>: test the removeAll(HCollection c) method using a pokedex list and an empty list
      * <br>
-     * <b>Test Description</b>: test removal of an empty list from the pokedex list, then test removal of a clone of the pokedex list. Then test the method
+     * <p><b>Test Description</b>: test removal of an empty list from the pokedex list, then test removal of a clone of the pokedex list. Then test the method
      * after adding a shared and a not shared element to the lists. Test the method with null as collection.
      * <br>
      * <b>Pre-Condition</b>: one list is populated with every pokemon in the pokedex and the other is empty
      * <br>
      * <b>Post-Condition</b>: one list is populated with two pokemon, while the other with just one. They share one element.
      * <br>
-     * <b>Expected Results</b>: calling the method with null as a collection throws NullPointerException. Removal of an empty collection doesn't change the list
+     * </p><b>Expected Results</b>: calling the method with null as a collection throws NullPointerException. Removal of an empty collection doesn't change the list
      * and therefore returns false, while removal of the list itself returns true as every element is removed and the list is now empty. The method returns true
      * if the list shares at least one element with the collection and the common element are removed.
      */
@@ -746,14 +837,14 @@ public class TestListSuite {
      * <br>
      * <b>Test Case Design</b>: test the retainAll(HCollection c) method on a pokedex list
      * <br>
-     * <b>Test Description</b>: test removal of all the elements not in the provided collection, then test immutability when called with a
+     * <p><b>Test Description</b>: test removal of all the elements not in the provided collection, then test immutability when called with a
      * collection of every item in the list. Then test the method after adding a shared and a not shared element to the lists. Test when null is provided as the collection.
      * <br>
      * <b>Pre-Condition</b>: the list is populated with every pokemon in the pokedex
      * <br>
      * <b>Post-Condition</b>: the list is populated with one pokemon not in the pokedex
      * <br>
-     * <b>Expected Results</b>: Using null as the collection to add throws NullPointerException; the method called with a clone of the list as collection
+     * </p><b>Expected Results</b>: Using null as the collection to add throws NullPointerException; the method called with a clone of the list as collection
      * returns false and therefore the list is unchanged, while using an empty list as collection returns true and every element in the list has been removed.
      * Calling the method using a collection with only one element shared with the list, returns true and keeps just that element in the list.
      */
@@ -787,14 +878,14 @@ public class TestListSuite {
      * <br>
      * <b>Test Case Design</b>: test the method set(int index, Object o) on a pokedex list
      * <br>
-     * <b>Test Description</b>: test the method when called with an index out of bounds. Then test the method on the pokedex list with a valid index, setting
+     * <p><b>Test Description</b>: test the method when called with an index out of bounds. Then test the method on the pokedex list with a valid index, setting
      * the pokemon in that position to a different one outside the pokedex.
      * <br>
      * <b>Pre-Condition</b>: the list is populated with every pokemon in the pokedex
      * <br>
      * <b>Post-Condition</b>: the list is still populated by the same number of pokemon, but now one of them are outside of the pokedex
      * <br>
-     * <b>Expected Results</b>: calling the method with an index out of bounds throws IndexOutOfBoundsException. Calling the method with a valid index and
+     * </p><b>Expected Results</b>: calling the method with an index out of bounds throws IndexOutOfBoundsException. Calling the method with a valid index and
      * providing a pokemon outside the pokedex changes the element at the index with the provided pokemon and returns the pokemon previously in that position
      */
 	@Test
@@ -822,5 +913,60 @@ public class TestListSuite {
 		assertNotEquals("Calling get(int index, Object o) should have changed the element at the provided index.", o1, list.get(4));
 		assertEquals("Calling get(int index, Object o) should have set the element at the provided index as the provided object.", list.get(4), "Sandile");
 	}
-
+	 /**
+     * <b>Summary</b>: test case for the subList(int fromIndex, int toIndex) method
+     * <br>
+     * <b>Test Case Design</b>: test the subList(int fromIndex, int toIndex) method on a pokedex list.
+     * <br>
+     * <p><b>Test Description</b>: test creating a subList of the pokedex list from the middle to its end. Test creating a sublist of the pokedex from start to the last
+     * element excluded and then test reflection of changes made in in the sublist to the pokedex list (for example clearing the sublist or
+     * adding an element to it). Test creating a sublist with indexes out of bounds.
+     * <br>
+     * <b>Pre-Condition</b>: the list is populated with every pokemon in the pokedex
+     * <br>
+     * <b>Post-Condition</b>: the list is with just two pokemon, one from outside the pokedex and one from it, in this order.
+     * <br>
+     * </p><b>Expected Results</b>: a sublist contains every element of the list from fromIndex to toIndex (excluded). Changes to the sublist are reflected to the
+     * original list, so clearing the sublist clears the original list in that range and adding an element to the sublist adds the same elements to the list relative to the
+     * range of the sublist. Creating a sublist with indexes out of bounds throws IndexOutOfBoundsException.
+     */
+	@Test
+	public void testSublist() {
+		HList pList = list.subList(5, list.size());
+		for(int i = 5; i < list.size(); i++) {
+			assertEquals("A sublist should contain every element of the list in its range.", list.get(i), pList.get(i - 5));
+		}
+		
+		pList = list.subList(0, list.size() - 1);
+		for(int i = 0; i < list.size(); i++) {
+			assertEquals("A sublist should contain every element of the list in its range.", list.get(i), pList.get(i - 0));
+		}
+		assertNotEquals("A sublist toIndex should be excluded.", pList.get(pList.size() - 1), list.get(list.size() - 1));
+		
+		pList.clear();
+		assertTrue("Clearing a sublist should not clear all the original list, but just the portion covered by the sublist.", pList.isEmpty() && !list.isEmpty());
+		boolean lSizeIs1 = list.size() == 1;
+		assertTrue("Clearing a sublist should shrink the original list by the size of the sublist.", lSizeIs1);
+		
+		pList.add("Aegislash");
+		assertEquals("Changes to the sublist should be reflected in the original list, relative to the ranges of the sublist.", pList.get(0), list.get(0));
+		
+		boolean exceptionThrown = false;
+		try {
+			list.subList(-4, 3);
+		}
+		catch(IndexOutOfBoundsException e) {
+			exceptionThrown = true;
+		}
+		assertTrue("Using an index greater than the list's size should throw IndexOutOfBoundsException.", exceptionThrown);
+		
+		exceptionThrown = false;
+		try {
+			list.subList(0, list.size() + 1);
+		}
+		catch(IndexOutOfBoundsException e) {
+			exceptionThrown = true;
+		}
+		assertTrue("Using an index greater than the list's size should throw IndexOutOfBoundsException.", exceptionThrown);
+	}
 }

@@ -55,13 +55,13 @@ public class TestListIteratorSuite {
      * <br>
      * <b>Test Case Design</b>: test the list iterator on an empty list
      * <br>
-     * <b>Test Description</b>: creates an iterator on the empty list and test the next and previous elements and their indexes.
+     * <p><b>Test Description</b>: creates an iterator on the empty list and test the next and previous elements and their indexes.
      * <br>
      * <b>Pre-Condition</b>: the list is empty
      * <br>
      * <b>Post-Condition</b>: the list is still empty
      * <br>
-     * <b>Expected Results</b>: an iterator on an empty list has no previous or next element, therefore previousIndex() returns -1 and next() returns 0 as the iterator
+     * </p><b>Expected Results</b>: an iterator on an empty list has no previous or next element, therefore previousIndex() returns -1 and next() returns 0 as the iterator
      * is always at the beginning of the list
      */
     @Test
@@ -79,14 +79,14 @@ public class TestListIteratorSuite {
      * <br>
      * <b>Test Case Design</b>: test list iterators starting from every valid index of a pokedex list.
      * <br>
-     * <b>Test Description</b>: test the method when index is out of bounds. Then test that the iterator is placed before the provided index (for every valid index), 
+     * <p><b>Test Description</b>: test the method when index is out of bounds. Then test that the iterator is placed before the provided index (for every valid index), 
      * so a subsequent call so next() returns the element in the list at the provided index, while previous() returns the element at index - 1.
      * <br>
      * <b>Pre-Condition</b>: the pokedex list is populated with every pokemon in the pokedex.
      * <br>
      * <b>Post-Condition</b>: the pokedex list is still populated with every pokemon in the pokedex.
      * <br>
-     * <b>Expected Results</b>: calling the method with an index out of bounds throws IndexOutOfBoundsException. An iterator just created from the index i, is placed
+     * </p><b>Expected Results</b>: calling the method with an index out of bounds throws IndexOutOfBoundsException. An iterator just created from the index i, is placed
      * before i, so that a subsequent call to next() returns the element at the position i in the list, while a call to previous() returns the element at the position i - 1
      */
 	@Test
@@ -119,14 +119,14 @@ public class TestListIteratorSuite {
      * <br>
      * <b>Test Case Design</b>: test the add(Object o) method on a pokedex list using an iterator starting from the middle of the list
      * <br>
-     * <b>Test Description</b>: create the list iterator starting from a valid position and test the insertion of the provided object before the implicit cursor, so
+     * <p><b>Test Description</b>: create the list iterator starting from a valid position and test the insertion of the provided object before the implicit cursor, so
      * that a subsequent call to next() would be unaffected but a subsequent call to previous() returns the added object.
      * <br>
      * <b>Pre-Condition</b>: the list is populated with every pokemon in the pokedex
      * <br>
      * <b>Post-Condition</b>: list is still populated with every pokemon in the pokedex plus a new one outside the pokedex in the middle of the list
      * <br>
-     * <b>Expected Results</b>:  the object has been added to the list (making it grow) and it's returned by a subsequent call to previous(), while a subsequent call to next() returns
+     * </p><b>Expected Results</b>:  the object has been added to the list (making it grow) and it's returned by a subsequent call to previous(), while a subsequent call to next() returns
      * is unaffected. Implicitly the cursor has been moved by one on the right (as an element has been added before it) and therefore a subsequent call to 
      * nextIndex() returns its previous value + 1.
      */
@@ -151,14 +151,14 @@ public class TestListIteratorSuite {
      * <br>
      * <b>Test Case Design</b>: test the hasNext() method on a pokedex list
      * <br>
-     * <b>Test Description</b>: test the hasNext() method of an iterator starting from the beginning of the pokemon list by repeatedly calling next() while hasNext()
+     * <p><b>Test Description</b>: test the hasNext() method of an iterator starting from the beginning of the pokemon list by repeatedly calling next() while hasNext()
      * returns true and then test calling next(). Test the value of nextIndex() when hasNext() is false.
      * <br>
      * <b>Pre-Condition</b>: the list is populated with every pokemon in the pokedex
      * <br>
      * <b>Post-Condition</b>: the list is still populated with every pokemon in the pokedex
      * <br>
-     * <b>Expected Results</b>: while hasNext() returns true, next() doesn't throw NoSuchElementException, but when hasNext() returns false a call to next() throws
+     * </p><b>Expected Results</b>: while hasNext() returns true, next() doesn't throw NoSuchElementException, but when hasNext() returns false a call to next() throws
      * NoSuchElementException (as the iterator's cursor is at the end of the list). When hasNext() is false the iterator is at the end of the list so nextIndex() returns 
      * the size of the list.
      */
@@ -192,14 +192,14 @@ public class TestListIteratorSuite {
      * <br>
      * <b>Test Case Design</b>: test the hasNext() method on a pokedex list
      * <br>
-     * <b>Test Description</b>: test the hasNext() method of an iterator starting from the end of the pokemon list by repeatedly calling previous() while hasPrevious()
+     * <p><b>Test Description</b>: test the hasNext() method of an iterator starting from the end of the pokemon list by repeatedly calling previous() while hasPrevious()
      * returns true and then test calling previous(). Test the value previousIndex() when hasPrevious() is false.
      * <br>
      * <b>Pre-Condition</b>: the list is populated with every pokemon in the pokedex
      * <br>
      * <b>Post-Condition</b>: the list is still populated with every pokemon in the pokedex
      * <br>
-     * <b>Expected Results</b>: while hasPrevious() returns true, previous() doesn't throw NoSuchElementException, but when hasPrevious() returns false a call to
+     * </p><b>Expected Results</b>: while hasPrevious() returns true, previous() doesn't throw NoSuchElementException, but when hasPrevious() returns false a call to
      * previous() throws NoSuchElementException (as the iterator's cursor is at the beginning of the list). When hasPrevious() is false the iterator is at the beginning
      * of the list so previousIndex() returns -1.
      */
@@ -233,14 +233,14 @@ public class TestListIteratorSuite {
      * <br>
      * <b>Test Case Design</b>: call previous and next back and forth on iterators from notable positions of a pokedex list.
      * <br>
-     * <b>Test Description</b>: test previous and next back and forth on an iterator from the end of the pokedex list, then test next and previous back and forth
+     * <p><b>Test Description</b>: test previous and next back and forth on an iterator from the end of the pokedex list, then test next and previous back and forth
      * on an iterator from the beginning of the pokedex list.
      * <br>
      * <b>Pre-Condition</b>: the list is populated with every pokemon in the pokedex
      * <br>
      * <b>Post-Condition</b>: the list is still populated with every pokemon in the pokedex
      * <br>
-     * <b>Expected Results</b>: When the iterator is at the end of the list, let p be the value returned by previous() and n the value returned by next() called in
+     * </p><b>Expected Results</b>: When the iterator is at the end of the list, let p be the value returned by previous() and n the value returned by next() called in
      * this order, p is equal to the value of a subsequent call to previous() and n is equal to the value of a subsequent() call to next(). When the iterator is at the 
      * beginning of the list, let n be the value returned by next() and p the value returned by previous() called in
      * this order, n is equal to the value of the subsequent call to next() and p is equal to the value of the subsequent call to previous(). 
@@ -264,14 +264,14 @@ public class TestListIteratorSuite {
      * <br>
      * <b>Test Case Design</b>: test next() on an iterator from the beginning of a pokedex list
      * <br>
-     * <b>Test Description</b>: Create a list iterator at the beginning of the pokedex list and test next() through the list. Test calling next() when the iterator is at the
+     * <p><b>Test Description</b>: Create a list iterator at the beginning of the pokedex list and test next() through the list. Test calling next() when the iterator is at the
      *  end of the list.
      * <br>
      * <b>Pre-Condition</b>: the list is populated with every pokemon in the pokedex
      * <br>
      * <b>Post-Condition</b>: the list is still populated with every pokemon in the pokedex
      * <br>
-     * <b>Expected Results</b>: calling next() through the list returns the correct sequence of elements in the list. Calling next() when the iterator is at the end of 
+     * </p><b>Expected Results</b>: calling next() through the list returns the correct sequence of elements in the list. Calling next() when the iterator is at the end of 
      * the list throws NoSuchElementException.
      */
 	@Test
@@ -297,14 +297,14 @@ public class TestListIteratorSuite {
      * <br>
      * <b>Test Case Design</b>: test nextIndex() on an iterator from the beginning of a pokedex list
      * <br>
-     * <b>Test Description</b>: Create a list iterator at the beginning of the pokedex list and test nextIndex() through the list. Test calling nextIndex() when
+     * <p><b>Test Description</b>: Create a list iterator at the beginning of the pokedex list and test nextIndex() through the list. Test calling nextIndex() when
      * the iterator is at the end of the list.
      * <br>
      * <b>Pre-Condition</b>: the list is populated with every pokemon in the pokedex
      * <br>
      * <b>Post-Condition</b>: the list is still populated with every pokemon in the pokedex
      * <br>
-     * <b>Expected Results</b>: calling nextIndex() through the list returns a sequence of numbers from 0 to the size of the list (excluded). Calling nextIndex() 
+     * </p><b>Expected Results</b>: calling nextIndex() through the list returns a sequence of numbers from 0 to the size of the list (excluded). Calling nextIndex() 
      * when the iterator is at the end of the list returns the size of the list.
      */
 	@Test
@@ -324,14 +324,14 @@ public class TestListIteratorSuite {
      * <br>
      * <b>Test Case Design</b>: test previous() on an iterator from the end of a pokedex list
      * <br>
-     * <b>Test Description</b>: Create a list iterator at the end of the pokedex list and test previous() through the list.
+     * <p><b>Test Description</b>: Create a list iterator at the end of the pokedex list and test previous() through the list.
      * Test calling previous() when the iterator is at the beginning of the list.
      * <br>
      * <b>Pre-Condition</b>: the list is populated with every pokemon in the pokedex
      * <br>
      * <b>Post-Condition</b>: the list is still populated with every pokemon in the pokedex
      * <br>
-     * <b>Expected Results</b>: calling previous() through the list returns the inverted sequence of elements in the list. Calling previous() when the iterator is at the
+     * </p><b>Expected Results</b>: calling previous() through the list returns the inverted sequence of elements in the list. Calling previous() when the iterator is at the
      * beginning of the list throws NoSuchElementException.
      */
 	@Test
@@ -357,14 +357,14 @@ public class TestListIteratorSuite {
      * <br>
      * <b>Test Case Design</b>: test previousIndex() on an iterator from the end of a pokedex list
      * <br>
-     * <b>Test Description</b>: Create a list iterator at the end of the pokedex list and test previousIndex() through the list. Test calling previousIndex() when
+     * <p><b>Test Description</b>: Create a list iterator at the end of the pokedex list and test previousIndex() through the list. Test calling previousIndex() when
      * the iterator is at the ebginning of the list.
      * <br>
      * <b>Pre-Condition</b>: the list is populated with every pokemon in the pokedex
      * <br>
      * <b>Post-Condition</b>: the list is still populated with every pokemon in the pokedex
      * <br>
-     * <b>Expected Results</b>: calling previousIndex() through the list returns a sequence of numbers from the size of the list (excluded) to -1. Calling previousIndex() 
+     * </p><b>Expected Results</b>: calling previousIndex() through the list returns a sequence of numbers from the size of the list (excluded) to -1. Calling previousIndex() 
      * when the iterator is at the beginning of the list returns -1.
      */
 	@Test
@@ -384,7 +384,7 @@ public class TestListIteratorSuite {
      * <br>
      * <b>Test Case Design</b>: test the remove() method on a pokedex list using an iterator starting from the middle of the list
      * <br>
-     * <b>Test Description</b>: create an iterator in the middle of the pokedex list and test remotion before and after calling previous()
+     * <p><b>Test Description</b>: create an iterator in the middle of the pokedex list and test remotion before and after calling previous()
      * or next(). Then test calling the method after calling ListAdapterIterator.add(Object o) and at last test calling the method without calling previous() or next()
      * since the last call to remove().
      * <br>
@@ -392,7 +392,7 @@ public class TestListIteratorSuite {
      * <br>
      * <b>Post-Condition</b>: the list is still populated with every pokemon in the pokedex
      * <br>
-     * <b>Expected Results</b>: Calling remove() removed the element returned by the last call to previous() or next(). If previous() or next() have not been called
+     * </p><b>Expected Results</b>: Calling remove() removed the element returned by the last call to previous() or next(). If previous() or next() have not been called
      * since the iterator creation or since the last call to remove(), or if ListAdapterIterator.add(Object o) has been called in the meanwhile, then remove()
      * throws IllegalStateException
      */
@@ -443,7 +443,7 @@ public class TestListIteratorSuite {
      * <br>
      * <b>Test Case Design</b>: test the set(Object o) method on a pokedex list using an iterator starting from the middle of the list
      * <br>
-     * <b>Test Description</b>: create an iterator in the middle of the pokedex list and test set(Object o) before and after calling previous()
+     * <p><b>Test Description</b>: create an iterator in the middle of the pokedex list and test set(Object o) before and after calling previous()
      * and next(). Then test calling the method when ListAdapterIterator.add(Object o) and ListAdapterIterator.remove() have been called
      * between set(Object o) and the last call to previous()/next().
      * <br>
@@ -451,7 +451,7 @@ public class TestListIteratorSuite {
      * <br>
      * <b>Post-Condition</b>: the list is still populated with pokemon from the pokedex
      * <br>
-     * <b>Expected Results</b>: Calling set(Object o) set to o the element of the list returned by the last call to previous() and next(). If previous() or next() have not
+     * </p><b>Expected Results</b>: Calling set(Object o) set to o the element of the list returned by the last call to previous() and next(). If previous() or next() have not
      * been called since the iterator creation or if ListAdapterIterator.add(Object o) or ListAdapterIterator.remove() have been called
      * in the meanwhile and previous() or next() have not been called again, then set(Object o) throws IllegalStateException
      */

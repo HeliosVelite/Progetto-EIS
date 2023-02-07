@@ -7,9 +7,7 @@ import org.junit.runner.notification.Failure;
 import java.util.*;
 
 /**
- * TestRunner class can be launched through command line to invoke all tests
- * for myTest package. In fact it has a main method to initiate and run all
- * the testing. It is based on JUnit framework.
+ * TestRunner class can be launched through command line to invoke all tests for myTest package. It is based on JUnit framework.
  * 
  * Main class to execute {@link myTest}
  * <p>
@@ -21,7 +19,6 @@ import java.util.*;
  * @author Zuech Riccardo
  */
 public class TestRunner{
-    // Contains the number of total test
     private static int numberOfTests = 0;
     private static int numberOfSuccesses = 0;
     private static int numberOfFails = 0;
@@ -48,9 +45,9 @@ public class TestRunner{
     }
 
     /**
-     * Elaborates the Result object returned from JUnitCore.runClasses.
+     * Elaborates an instance of Result returned from JUnitCore.runClasses.
      * 
-     * @param result results returned from JUnit.runClasses
+     * @param result test results returned from JUnit.runClasses
      * @see JUnitCore#runClasses(Class...)
      * @see Result
      */
@@ -64,21 +61,19 @@ public class TestRunner{
     }
 
     /**
-     *  Prints test statistics/result after the tests suites being runned.
+     *  Prints test statistics and results after the tests suites has been run.
      *  <br>
-     *  For every suite is indicated how many test of the relative suite
-     *  have been executed and how many failed
-     * 
+     *  For each test suite shows how many test cases have been executed, how many failed and how many succeeded.
      */
     private static void printStatistics()
     {
         System.out.println("Number of tests runned: " + numberOfTests);
-        System.out.println("Number of successfull tests: " + numberOfSuccesses + " (" + (float)numberOfSuccesses / (float)numberOfTests * 100 + "%)");
-        System.out.println("Number of failed tests: " + numberOfFails + " (" + (float)numberOfFails / (float)numberOfTests * 100 + "%)");
+        System.out.println("Number of successfull tests: " + numberOfSuccesses + " (" + (float) numberOfSuccesses / (float) numberOfTests * 100 + "%)");
+        System.out.println("Number of failed tests: " + numberOfFails + " (" + (float) numberOfFails / (float) numberOfTests * 100 + "%)");
         System.out.println("Time passed: " + time + "ms");
-        System.out.println("Mean time per test case: " + (float)time / numberOfTests + "ms");
+        System.out.println("Mean time per test case: " + (float) time / numberOfTests + "ms");
 
-        // Prints all failed tests if there are any
+        // Prints all failed tests if any
         if (numberOfFails > 0){
             System.out.println("Failed tests are: ");
             for (Failure f : failures)
