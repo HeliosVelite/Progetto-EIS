@@ -81,7 +81,7 @@ import myAdapter.ListAdapter;
  * <li>{@code HList emptylist}: an empty instance of ListAdapter.</li>
  * </ul>
  * 
- * @see TestListAdapterSuite
+ * @see TestListSuite
  * @see ListAdapter
  * @author Zuech Riccardo
  */

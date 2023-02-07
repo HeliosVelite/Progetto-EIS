@@ -14,7 +14,7 @@ import java.util.NoSuchElementException;
  * <b>This class purpose is to force Java Micro Edition CLDC1.1 version of the Vector class into a work environment with the last version of Java</b>
  * @see <a href="https://docs.oracle.com/javame/config/cldc/ref-impl/cldc1.1/jsr139/index.html">CLDC1.1</a>
 
- * @author Zuech
+ * @author Zuech Riccardo
  */
 public class Vector {
 		

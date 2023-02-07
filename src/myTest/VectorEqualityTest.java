@@ -4,7 +4,6 @@ import static org.junit.Assert.*;
 import myAdapter.Vector;
 
 public class VectorEqualityTest {
-
 	@Test
 	public void vectorEqualityIsObjectEquality() {
 		Vector vec1 = new Vector();
