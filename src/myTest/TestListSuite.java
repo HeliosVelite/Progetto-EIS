@@ -17,15 +17,15 @@ import myAdapter.ListAdapter;
  * <b>Summary</b>: The test suite TestListSuite collects test cases on methods of the ListAdapter class.
  * This collection of test cases covers every method of the ListAdapter class and test their intended behaviour and edge-cases.
  * 
- * The {@link ListAdapter.ListIterator} test cases are collected in a dedicated test suite. 
+ * The {@link ListIterator} test cases are collected in a dedicated test suite. 
  * <br>
  * <b>Test Suite Design</b>: The test suite contains test cases designed to test the intended behaviour of the ListAdapter class' methods and their
- * edge-cases. In order to do so the test suite uses two instances of ListAdapter: an empty list and a generic list populated by a immutable collection of pokemon
+ * edge-cases. In order to do so the test suite uses two instances of ListAdapter: an empty list and a generic list populated by an immutable collection of pokemon
  * (referred to as pokedex).
  * <br>
- * <b>Pre-Condition</b>:
+ * <b>Pre-Condition</b>: none
  * <br>
- * <b>Post-Condition</b>:
+ * <b>Post-Condition</b>: none
  * <br>
  * <b>Test Cases</b>:
  * <li>
@@ -95,7 +95,14 @@ import myAdapter.ListAdapter;
  * 		{@link testSublist}
  * </li>
  * <br>
- * <b>Test suite execution records</b>:
+ * <b>Test suite execution records</b>: <ul>
+ * <li>JVM from JME CLDC 1.1
+ * </li>
+ * <li>JUnit 4.13
+ * </li>
+ * <li>Hamcrest 1.3
+ * </li>
+ * </ul>
  * <br>
  * <b>Execution Variables</b>: <ul>
  * <li>{@code String[] pokedex = {"Bulbasaur", "Ivysaur", "Venusaur", "Charmander", "Charmeleon",
@@ -104,6 +111,7 @@ import myAdapter.ListAdapter;
  * <li>{@code HList emptylist}: an empty instance of ListAdapter.</li>
  * </ul>
  * 
+ * @see TestListIteratorSuite
  * @see ListAdapter
  * @author Zuech Riccardo
  */

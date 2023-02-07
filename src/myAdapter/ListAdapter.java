@@ -82,7 +82,7 @@ public class ListAdapter implements HList{
      * Returns true if this list contains the specified element. More formally, 
      * returns true if and only if this list contains at least one element e such that (o==null ? e==null : o.equals(e)).
      *
-     * @param obj element whose presence in this list is to be tested.
+     * @param o element whose presence in this list is to be tested.
      * 
      * @return true if this list contains the specified element.
      */
@@ -122,7 +122,7 @@ public class ListAdapter implements HList{
 	/**
      * Returns an array containing all of the elements in this list in proper sequence.
      *
-     * @param arrayTarget the array into which the elements of this list are to be
+     * @param a the array into which the elements of this list are to be
      * stored, if it is big enough; otherwise, a new array of the same runtime type is allocated for this purpose.
      * 
      * @return an array containing the elements of this list.
@@ -159,7 +159,7 @@ public class ListAdapter implements HList{
 	/**
      * Appends the specified element to the end of this list.
      *
-     * @param obj element to be appended to this list.
+     * @param o element to be appended to this list.
      * @return true (as per the general contract of the Collection.add method).
      */
 	public boolean add(Object o) {
@@ -172,7 +172,7 @@ public class ListAdapter implements HList{
      * removes the element with the lowest index i such that (o==null ? get(i)==null : o.equals(get(i)))
      * (if such an element exists).
      *
-     * @param obj element to be removed from this list, if present.
+     * @param o element to be removed from this list, if present.
      * @return true if this list contained the specified element.
      * 
      */
@@ -188,7 +188,7 @@ public class ListAdapter implements HList{
 	/**
      * Returns true if this list contains all of the elements of the specified collection.
      *
-     * @param coll collection to be checked for containment in this list.
+     * @param c collection to be checked for containment in this list.
      * @return true if this list contains all of the elements of the specified collection.
      * @throws NullPointerException if the specified collection is null.
      */
@@ -208,7 +208,7 @@ public class ListAdapter implements HList{
      * if the specified collection is modified while the operation is in progress.
      * (Note that this will occur if the specified collection is this list, and it's nonempty.)
      *
-     * @param coll collection whose elements are to be added to this list.
+     * @param c collection whose elements are to be added to this list.
      * @return true if this list changed as a result of the call.
      *
      * @throws NullPointerException if the specified collection contains one or more null elements and this list does not support null elements, or if the specified collection is null.
@@ -231,7 +231,7 @@ public class ListAdapter implements HList{
      * collection is this list, and it's nonempty.)
      *
      * @param index index at which to insert first element from the specified collection.
-     * @param coll elements to be inserted into this list.
+     * @param c elements to be inserted into this list.
      * @return true if this list changed as a result of the call.
      *
      * @throws NullPointerException if the specified collection contains one or more null elements and this list does not support null elements, or if the specified collection is null.
@@ -251,7 +251,7 @@ public class ListAdapter implements HList{
 	/**
      * Removes from this list all the elements that are contained in the specified collection.
      *
-     * @param coll collection that defines which elements will be removed from this list.
+     * @param c collection that defines which elements will be removed from this list.
      * @return true if this list changed as a result of the call.
      *
      * @throws NullPointerException  if the specified collection is null.
@@ -273,7 +273,7 @@ public class ListAdapter implements HList{
      * collection. In other words, removes from this list all
      * the elements that are not contained in the specified collection.
      *
-     * @param coll collection that defines which elements this set will retain.
+     * @param c collection that defines which elements this set will retain.
      *
      * @return true if this list changed as a result of the call.
      *
@@ -313,7 +313,7 @@ public class ListAdapter implements HList{
      * if they contain the same elements in the same order. This definition ensures
      * that the equals method works properly across different implementations of the List interface.
      *
-     * @param obj the object to be compared for equality with this list.
+     * @param o the object to be compared for equality with this list.
      * @return true if the specified object is equal to this list.
      */
 	@Override
@@ -410,7 +410,7 @@ public class ListAdapter implements HList{
      * element, or -1 if this list does not contain this element. More formally,
      * returns the lowest index i such that (o==null ? get(i)==null : o.equals(get(i))), or -1 if there is no such index.
      *
-     * @param obj element to search for.
+     * @param o element to search for.
      * @return the index in this list of the first occurrence of the specified
      * element, or -1 if this list does not contain this element.
      * 
@@ -425,7 +425,7 @@ public class ListAdapter implements HList{
      * element, or -1 if this list does not contain this element. More formally,
      * returns the highest index i such that (o==null ? get(i)==null : o.equals(get(i))), or -1 if there is no such index.
      *
-     * @param obj element to search for.
+     * @param o element to search for.
      * @return the index in this list of the last occurrence of the specified element, or -1 if this list does not contain this element.
      */
 	public int lastIndexOf(Object o) {
@@ -536,6 +536,7 @@ public class ListAdapter implements HList{
 		}
 		/**
 		 * Default constructor: creates an iterator whose cursor is placed at the specified index.
+		 * @param index index where the implicit cursor is placed
 		 */
 		public ListAdapterIterator(int index) {
 			cursor = index;
@@ -642,7 +643,7 @@ public class ListAdapter implements HList{
 	     * neither ListIterator.remove nor ListIterator.add have been
 	     * called after the last call to next or previous.
 	     *
-	     * @param obj the element with which to replace the last element returned by
+	     * @param o the element with which to replace the last element returned by
 	     * next or previous.
 	     *
 	     * @throws IllegalStateException neither next nor previous have been called, or remove or add have been called after the last call to * next or previous.
@@ -663,7 +664,7 @@ public class ListAdapter implements HList{
 	     * call increases by one the value that would be returned by a call to
 	     * nextIndex or previousIndex.)
 	     *
-	     * @param obj the element to insert.
+	     * @param o the element to insert.
 	     */
 		public void add(Object o) {
 			ListAdapter.this.add(cursor, o);

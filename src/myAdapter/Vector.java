@@ -125,7 +125,7 @@ public class Vector {
 	     * @param index the index to start searching from.
 	     * @return the index of the first occurrence of the object argument in this vector at position index or later in the vector; returns -1 if the object is not found.
 	     * @throws IndexOutOfBoundsException if index is out of bounds.
-	     * @see Object.equals(java.lang.Object
+	     * @see Object.equals(java.lang.Object)
 	     */
 	    public int indexOf(Object elem, int index) throws IndexOutOfBoundsException {
 	        return vector.indexOf(elem, index);

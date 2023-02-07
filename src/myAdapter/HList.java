@@ -196,7 +196,7 @@ public interface HList extends HCollection {
      * @throws ClassCastException if the class of one of elements of the specified collection prevents it from being added to this list.
      * @throws NullPointerException if the specified collection contains one or more null elements and this list does not support null elements, or if the specified collection is null.
      * @throws IllegalArgumentException if some aspect of one of elements of the specified collection prevents it from being added to this list.
-     * @throws IndexOutOfBoundsException if the index is out of range (index < 0 || index &lt; size()).
+     * @throws IndexOutOfBoundsException if the index is out of range (index &lt; 0 || index &gt; size()).
 
      */
     boolean addAll(int index, HCollection coll);

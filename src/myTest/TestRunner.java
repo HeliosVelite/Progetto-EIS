@@ -10,10 +10,9 @@ import java.util.*;
  * TestRunner class can be launched through command line to invoke all tests for myTest package. It is based on JUnit framework.
  * 
  * Main class to execute {@link myTest}
- * <p>
  * 
  * @version JUnit 4.13
- * @version Harmcrest: 1.3
+ * @version Hamcrest 1.3
  * @version JVM from JME CLDC 1.1
  * 
  * @author Zuech Riccardo

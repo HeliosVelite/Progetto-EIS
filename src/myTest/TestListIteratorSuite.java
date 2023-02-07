@@ -14,7 +14,76 @@ import myAdapter.HListIterator;
 import myAdapter.ListAdapter;
 
 /**
+ * <b>Summary</b>: The test suite TestListSuite collects test cases on methods of the ListAdapter.ListIterator class.
+ * This collection of test cases covers every method of the ListAdapter.ListIterator class and test their intended behaviour and edge-cases.
  * 
+ * The {@link ListAdapter} test cases are collected in a dedicated test suite. 
+ * <br>
+ * <b>Test Suite Design</b>: The test suite contains test cases designed to test the intended behaviour of the ListAdapter.ListIterator class' methods and their
+ * edge-cases. In order to do so the test suite uses two instances of ListAdapter: an empty list and a generic list populated by an immutable collection of pokemon
+ * (referred to as pokedex).
+ * <br>
+ * <b>Pre-Condition</b>: none
+ * <br>
+ * <b>Post-Condition</b>: none
+ * <br>
+ * <b>Test Cases</b>:
+ * <li>
+ * 		{@link testEmptyListIterator}
+ * </li>
+ * <li>
+ * 		{@link testIteratorFromIndex}
+ * </li>
+ * <li>
+ * 		{@link testAdd}
+ * </li>
+ * <li>
+ * 		{@link testHasNext}
+ * </li>
+ * <li>
+ * 		{@link testHasPrevious}
+ * </li>
+ * <li>
+ * 		{@link testNextPrevious}
+ * </li>
+ * <li>
+ * 		{@link testNext}
+ * </li>
+ * <li>
+ * 		{@link testPrevious}
+ * </li>
+ * <li>
+ * 		{@link testPreviousIndex}
+ * </li>
+ * <li>
+ * 		{@link testNextIndex}
+ * </li>
+ * <li>
+ * 		{@link testRemove}
+ * </li>
+ * <li>
+ * 		{@link testSet}
+ * </li>
+ * <br>
+ * <b>Test suite execution records</b>:<ul>
+ * <li>JVM from JME CLDC 1.1
+ * </li>
+ * <li>JUnit 4.13
+ * </li>
+ * <li>Hamcrest 1.3
+ * </li>
+ * </ul>
+ * <br>
+ * <b>Execution Variables</b>: <ul>
+ * <li>{@code String[] pokedex = {"Bulbasaur", "Ivysaur", "Venusaur", "Charmander", "Charmeleon",
+			"Charizard", "Squirtle", "Wartortle", "Blastoise"};}: An immutable array of pokemon from which the list istance of ListAdapter is populated.</li>
+ * <li>{@code HList list}: an instance of ListAdapter populated by every pokemon in the pokedex.</li>
+ * <li>{@code HList emptylist}: an empty instance of ListAdapter.</li>
+ * </ul>
+ * 
+ * @see TestListAdapterSuite
+ * @see ListAdapter
+ * @author Zuech Riccardo
  */
 public class TestListIteratorSuite {
 	
