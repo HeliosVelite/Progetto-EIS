@@ -50,7 +50,7 @@ public class TestListSuite {
         System.out.println("TestListSuite ended. Time elapsed " + (System.currentTimeMillis() - timeStart)  + "ms.");
     }
     /**
-     * <b>Summary</b>: test the initialisation of an empty list through the default constructor
+     * <b>Summary</b>: test case fot the initialisation of an empty list through the default constructor
      * <br>
      * <b>Test Case Design</b>: test the emptiness of a list created from the default constructor
      * <br>
@@ -79,7 +79,7 @@ public class TestListSuite {
 		assertTrue(zeroSize);
 	}
 	/**
-     * <b>Summary</b>: test the initialisation of a list through the collection constructor
+     * <b>Summary</b>: test case for the initialisation of a list through the collection constructor
      * <br>
      * <b>Test Case Design</b>: test that a list instantiated by passing a collection to its constructor contains each element of the provided collection
      * <br>
@@ -109,7 +109,7 @@ public class TestListSuite {
 	}
 
     /**
-     * <b>Summary</b>: test the contains(Object o) method
+     * <b>Summary</b>: test case for the contains(Object o) method
      * <br>
      * <b>Test Case Design</b>: test the contains(Object o) method a pokedex list and an empty list checking for notable elements.
      * <br>
@@ -138,7 +138,7 @@ public class TestListSuite {
 		assertTrue("Null should be contained after adding it.", list.contains(null) && emptylist.contains(null));
 	}
 	/**
-     * <b>Summary</b>: test the containsAll(HCollection c)
+     * <b>Summary</b>: test case for the containsAll(HCollection c)
      * <br>
      * <b>Test Case Design</b>: test the containsAll(HCollection c) method on a pokedex list using notable collections as argument
      * <br>
@@ -168,7 +168,7 @@ public class TestListSuite {
 		assertTrue("A list should not contain a collection of size greater than itself.", gtSize);
 	}
     /**
-     * <b>Summary</b>: test the equals() method
+     * <b>Summary</b>: test case for the equals() method
      * <br>
      * <b>Test Case Design</b>: test the equals() method on an empty and a pokedex list, two lists are defined to be equal if they contain the
      * same elements in the same order
@@ -822,18 +822,5 @@ public class TestListSuite {
 		assertNotEquals("Calling get(int index, Object o) should have changed the element at the provided index.", o1, list.get(4));
 		assertEquals("Calling get(int index, Object o) should have set the element at the provided index as the provided object.", list.get(4), "Sandile");
 	}
-    /**
-     * <b>Summary</b>:
-     * <br>
-     * <b>Test Case Design</b>: 
-     * <br>
-     * <b>Test Description</b>: 
-     * <br>
-     * <b>Pre-Condition</b>: one list is populated with every pokemon in the pokedex and the other is empty
-     * <br>
-     * <b>Post-Condition</b>: one list is still populated with every pokemon in the pokedex and the other is still empty
-     * <br>
-     * <b>Expected Results</b>: 
-     */
 
 }

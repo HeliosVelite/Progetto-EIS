@@ -623,7 +623,7 @@ public class ListAdapter implements HList{
 		}
 		/**
 	     * Removes from the list the last element that was returned by next or
-	     * previous (optional operation). This call can only be made once per
+	     * previous. This call can only be made once per
 	     * call to next or previous. It can be made only if
 	     * ListIterator.add has not been called after the last call to
 	     * next or previous.
@@ -638,7 +638,7 @@ public class ListAdapter implements HList{
 		}
 		/**
 	     * Replaces the last element returned by next or previous with
-	     * the specified element (optional operation). This call can be made only if
+	     * the specified element. This call can be made only if
 	     * neither ListIterator.remove nor ListIterator.add have been
 	     * called after the last call to next or previous.
 	     *
@@ -653,7 +653,7 @@ public class ListAdapter implements HList{
 			.set(lastCall, o);
 		}
 		/**
-	     * Inserts the specified element into the list (optional operation). The element
+	     * Inserts the specified element into the list. The element
 	     * is inserted immediately before the next element that would be returned by
 	     * next, if any, and after the next element that would be returned by
 	     * previous, if any. (If the list contains no elements, the new element
