@@ -97,7 +97,7 @@ public class TestListIteratorSuite {
      */
 	@BeforeClass
 	public static void beforeClassMethod() {
-		System.out.println("TestListSuite started.");
+		System.out.println("TestListIteratorSuite started.");
 		timeStart = System.currentTimeMillis();
 	}
 	/**
@@ -116,7 +116,7 @@ public class TestListIteratorSuite {
      */
     @AfterClass
     public static void afterClassMethod(){
-        System.out.println("TestListSuite ended. Time elapsed " + (System.currentTimeMillis() - timeStart)  + "ms.");
+        System.out.println("TestListIteratorSuite ended. Time elapsed " + (System.currentTimeMillis() - timeStart)  + "ms.");
     }
     
     /**
