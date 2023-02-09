@@ -806,15 +806,17 @@ public class TestListSuite {
      * <b>Test Case Design</b>: test the removeAll(HCollection c) method using a pokedex list and an empty list
      * <br>
      * <p><b>Test Description</b>: test removal of an empty list from the pokedex list, then test removal of a clone of the pokedex list. Then test the method
-     * after adding a shared and a not shared element to the lists. Test the method with null as collection.
+     * after adding a shared and a not shared element to the lists. Test the method with null as collection. Test the method on the pokedex list plus an already
+     * contained element using a collection containing that element.
      * <br>
      * <b>Pre-Condition</b>: one list is populated with every pokemon in the pokedex and the other is empty
      * <br>
-     * <b>Post-Condition</b>: one list is populated with two pokemon, while the other with just one. They share one element.
+     * <b>Post-Condition</b>: the empty list now contains two pokemon (outside the pokedex) and the pokedex list is empty
      * <br>
      * </p><b>Expected Results</b>: calling the method with null as a collection throws NullPointerException. Removal of an empty collection doesn't change the list
      * and therefore returns false, while removal of the list itself returns true as every element is removed and the list is now empty. The method returns true
-     * if the list shares at least one element with the collection and the common element are removed.
+     * if the list shares at least one element with the collection and the common element are removed. The method removes all instances of the elements in 
+     * the collection, therefore if an element contained in the collection has one or more occurrences in the list, all occurrences are removed.
      */
 	@Test
 	public void testRemoveAll() {
@@ -839,6 +841,11 @@ public class TestListSuite {
 		assertTrue("Calling removeAll(HCollection c) when c and the list share at least one item should remove the shared elements.", list.removeAll(emptylist));
 		String[] a = {"Chespin"};
 		assertArrayEquals("The shared elements should have been removed..", a, list.toArray());
+		
+		list.add(list.get(0));
+		emptylist.add(list.get(0));
+		assertTrue("Calling removeAll(HCollection c) should remove all occurances of each element of c in the list.", list.removeAll(emptylist));
+		assertTrue("Calling removeAll(HCollection c) should remove *all* occurances of each element of c in the list.",  list.isEmpty());
 	}
     /**
      * <b>Summary</b>: test case for the retainAll(HCollection c) method
